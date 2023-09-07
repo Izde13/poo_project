@@ -15,10 +15,6 @@ public class Product {
 	}
 	
 
-	int viewProductInformation() {
-        return this.idProduct;			
-	}
-
 	public int getIdProduct() {
 		return idProduct;
 	}

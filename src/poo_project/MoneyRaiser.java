@@ -25,15 +25,26 @@ public class MoneyRaiser {
 	}
 	
 	void generateBill(){
-		System.out.println("Id movement: " + this.idMovement);
-		System.out.println("Id user: " + this.idUser);
-		System.out.println("Id product: " + this.idProduct);
-		System.out.println("Cost product: " + this.costProduct);
-		System.out.println("Discount: " + this.discount);
-		System.out.println("Iva: " + this.valueIva);
-		System.out.println("Total cost: " + this.totalCost);
-		System.out.println("Amount: " + this.amount);
-		System.out.println("Payment type: " + this.paymentType);
+		ProductManager productManager = new ProductManager();
+		AccountManager accountManager = new AccountManager();
+		String nameProduct = productManager.productNameById(idProduct);
+		String nameUser = accountManager.nameUserById(idUser);
+		System.out.println(" ------------------------------------------------");
+		System.out.println("|					Invoice ✅                   |");
+		System.out.println(" ------------------------------------------------");
+		System.out.println("* Id movement: " + this.idMovement);
+		System.out.println("* Id user: " + this.idUser);
+		System.out.println("* Name user: " + nameUser);
+		System.out.println("* Name product: " + nameProduct);
+		System.out.println("* Cost product: " + this.costProduct);
+		System.out.println("* Discount: " + this.discount);
+		System.out.println("* Iva: " + this.valueIva);
+		System.out.println("* Total cost: " + this.totalCost);
+		System.out.println("* Amount: " + this.amount);
+		System.out.println("* Payment type: " + this.paymentType);
+		System.out.println(" ------------------------------------------------");
+		System.out.println("|			Thanks for your purchase!    		 |");
+		System.out.println(" ------------------------------------------------");
 	}
 
 	public int getIdMovement() {

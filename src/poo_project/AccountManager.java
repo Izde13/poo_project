@@ -17,7 +17,6 @@ public class AccountManager {
 		listUsers.add(newUser);
 		Account newAccount = new Account(newUser);
 		listAccounts.add(newAccount);
-		System.out.println("User added");
 	}
 	
 	
@@ -44,6 +43,7 @@ public class AccountManager {
 	}
 	
 	User editUserById(int id) {
+		//Validar si tambien debo editar la cuenta
 		for (int i = 0; i < listUsers.size(); i++) {
 		      if(listUsers.get(i).getIdUser() == id ) {
 		    	  return listUsers.get(i);
@@ -57,6 +57,11 @@ public class AccountManager {
 		      if(listUsers.get(i).getIdUser() == id ) {
 		    	  listUsers.remove(i);
 		      } 
+		 }
+		for (int i = 0; i < listAccounts.size(); i++) {
+			if(listAccounts.get(i).getOwner().getIdUser() == id ) {
+				listAccounts.remove(i);
+		    } 
 		 }
 	}
 	
@@ -80,5 +85,12 @@ public class AccountManager {
 		listMoneyRaiser.get(idMovement-1).generateBill();;
 	}
 	
-
+	String nameUserById(int id) {
+		for (int i = 0; i < listUsers.size(); i++) {
+		      if(listUsers.get(i).getIdUser() == id ) {
+		    	  return listUsers.get(i).getFirstName() + " " + listUsers.get(i).getLastName();
+		      } 
+		 }
+		return null;
+	}
 }

@@ -12,7 +12,6 @@ public class ProductManager {
 	
 	void createProduct(Product newProduct){
 		listProducts.add(newProduct);
-		System.out.println("Product added");
 	}
 	
 	boolean findIdProduct(int id) {
@@ -44,11 +43,20 @@ public class ProductManager {
 	
 	void showAllProducts() {
 		for (int i = 0; i < listProducts.size(); i++) {
-			System.out.println(i+1 + "." + "Product: " + listProducts.get(i).getName() + " - Cost: " + listProducts.get(i).getCost());
+			System.out.println(" + " + i+1 + "." + "Product: " + listProducts.get(i).getName() + " - Cost: " + listProducts.get(i).getCost());
 		 }
 	}
 	
 	Product productByIndex(int index) {
 		return listProducts.get(index);
+	}
+	
+	String productNameById(int id) {
+		for (int i = 0; i < listProducts.size(); i++) {
+		      if(listProducts.get(i).getIdProduct() == id ) {
+		    	  return listProducts.get(i).getName();
+		      } 
+		 }
+		return null;
 	}
 }
