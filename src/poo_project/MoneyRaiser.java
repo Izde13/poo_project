@@ -1,12 +1,10 @@
 package poo_project;
 
 public class MoneyRaiser {
-	//En esta clase se deben generar los movimientos
-	//de compra de cada producto por usuario
-	
+
 	int idMovement;
 	int idUser;
-	int idProdut;
+	int idProduct;
 	double costProduct;
 	double discount;
 	double valueIva;
@@ -14,10 +12,10 @@ public class MoneyRaiser {
 	int amount;
 	String paymentType;
 	
-	MoneyRaiser( int idMovement,int idUser,int idProdut,double costProduct,double discount,double valueIva,double totalCost,int amount,String paymentType) {
+	MoneyRaiser( int idMovement,int idUser,int idProduct,double costProduct,double discount,double valueIva,double totalCost,int amount,String paymentType) {
 		this.idMovement = idMovement;
 		this.idUser = idUser ;
-		this.idProdut = idProdut;
+		this.idProduct = idProduct;
 		this.costProduct = costProduct;
 		this.discount = discount;
 		this.valueIva = valueIva;
@@ -27,8 +25,89 @@ public class MoneyRaiser {
 	}
 	
 	void generateBill(){
-		
+		System.out.println("Id movement: " + this.idMovement);
+		System.out.println("Id user: " + this.idUser);
+		System.out.println("Id product: " + this.idProduct);
+		System.out.println("Cost product: " + this.costProduct);
+		System.out.println("Discount: " + this.discount);
+		System.out.println("Iva: " + this.valueIva);
+		System.out.println("Total cost: " + this.totalCost);
+		System.out.println("Amount: " + this.amount);
+		System.out.println("Payment type: " + this.paymentType);
 	}
+
+	public int getIdMovement() {
+		return idMovement;
+	}
+
+	public void setIdMovement(int idMovement) {
+		this.idMovement = idMovement;
+	}
+
+	public int getIdUser() {
+		return idUser;
+	}
+
+	public void setIdUser(int idUser) {
+		this.idUser = idUser;
+	}
+
+	public int getIdProduct() {
+		return idProduct;
+	}
+
+	public void setIdProduct(int idProduct) {
+		this.idProduct = idProduct;
+	}
+
+	public double getCostProduct() {
+		return costProduct;
+	}
+
+	public void setCostProduct(double costProduct) {
+		this.costProduct = costProduct;
+	}
+
+	public double getDiscount() {
+		return discount;
+	}
+
+	public void setDiscount(double discount) {
+		this.discount = discount;
+	}
+
+	public double getValueIva() {
+		return valueIva;
+	}
+
+	public void setValueIva(double valueIva) {
+		this.valueIva = valueIva;
+	}
+
+	public double getTotalCost() {
+		return totalCost;
+	}
+
+	public void setTotalCost(double totalCost) {
+		this.totalCost = totalCost;
+	}
+
+	public int getAmount() {
+		return amount;
+	}
+
+	public void setAmount(int amount) {
+		this.amount = amount;
+	}
+
+	public String getPaymentType() {
+		return paymentType;
+	}
+
+	public void setPaymentType(String paymentType) {
+		this.paymentType = paymentType;
+	}
+	
 	
 	
 }

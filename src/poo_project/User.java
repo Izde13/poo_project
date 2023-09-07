@@ -2,14 +2,14 @@ package poo_project;
 
 public class User {
 
-	String firstName;
-	String lastName;
-	int idUser;
-	int mobile;
-	String role;
-	String email;
-	double availableMoney;
-	
+	private String firstName;
+	private String lastName;
+	private int idUser;
+	private int mobile;
+	private String role;
+	private String email;
+
+
 	User(String firstName, String lastName, int idUser, int mobile, String role, String email){
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -17,33 +17,9 @@ public class User {
 		this.mobile = mobile;
 		this.role = role;
 		this.email = email;
-		this.availableMoney = 0;
 	}
 	
-	void createAccount(){
-		//Función para cuando se escriba en el archivo plano
-	}
-	
-	void editAccount(){
-		//Función para cuando se escriba en el archivo plano
-	}
-	
-	void removeAccount(){
-		//Función para cuando se escriba en el archivo plano
-	}
-	
-	void rechargeAccount() {
 		
-	}
-	
-	String viewUserInformation() {
-        return this.firstName + " " + this.lastName;			
-	}
-	
-	void buy() {
-		
-	}
-	
 	public String getFirstName() {
 		return firstName;
 	}
@@ -92,13 +68,5 @@ public class User {
 		this.email = email;
 	}
 
-	public double getAvailableMoney() {
-		return availableMoney;
-	}
-
-	public void setAvailableMoney(double availableMoney) {
-		this.availableMoney = availableMoney;
-	}
-	
 
 }
