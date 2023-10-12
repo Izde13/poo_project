@@ -67,6 +67,7 @@ public class Controller {
 		 System.out.println("* Enter the role:                  ");
 		 System.out.println(" *  1. Student                      ");
 		 System.out.println(" *  2. Admin                        ");
+		 System.out.println(" *  3. Employee                     ");
 		 int option = sn.nextInt();
 		 String role = "";
 		 if(option == 1) {
@@ -75,8 +76,10 @@ public class Controller {
 		 if(option == 2) {
 			 role = "Admin";
 		 }
-		 System.out.println("* Enter the email:                  ");
-		 
+		 if(option == 3) {
+			 role = "Employee";
+		 }
+		 System.out.println("* Enter the email:                  ");		 
 		 String email = sn.next();
 		 User user = new User(firstName,lastName,idUser,mobile,role,email);
 		 AccountManager accountManager = new AccountManager();

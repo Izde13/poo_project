@@ -75,7 +75,13 @@ public class AccountManager {
 	}
 	
 	void createMovement(int idUser,int idProduct,double costProduct, int amount, String paymentType) {
-		double discount = 500;
+		User user = editUserById(idUser);
+		double discount = 0;	
+		if(user.getRole().equals("Employee")) {
+			double discountPerProduct = 0;
+			discountPerProduct = costProduct * 0.1;
+			discount = discountPerProduct * amount;
+		}		
 		double valueIvaPerProduct = costProduct * 0.19;
 		double valueIva = valueIvaPerProduct * amount;
 		double totalCost = (costProduct * amount) - discount + valueIva;
@@ -89,6 +95,15 @@ public class AccountManager {
 		for (int i = 0; i < listUsers.size(); i++) {
 		      if(listUsers.get(i).getIdUser() == id ) {
 		    	  return listUsers.get(i).getFirstName() + " " + listUsers.get(i).getLastName();
+		      } 
+		 }
+		return null;
+	}
+	
+	String roleUserById(int id) {
+		for (int i = 0; i < listUsers.size(); i++) {
+		      if(listUsers.get(i).getIdUser() == id ) {
+		    	  return listUsers.get(i).getRole();
 		      } 
 		 }
 		return null;

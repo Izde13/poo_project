@@ -43,7 +43,7 @@ public class ProductManager {
 	
 	void showAllProducts() {
 		for (int i = 0; i < listProducts.size(); i++) {
-			System.out.println(" + " + i+1 + "." + "Product: " + listProducts.get(i).getName() + " - Cost: " + listProducts.get(i).getCost());
+			System.out.println(" + " + (i+1) + "." + "Product: " + listProducts.get(i).getName() + " - Cost: " + listProducts.get(i).getCost());
 		 }
 	}
 	
@@ -59,4 +59,5 @@ public class ProductManager {
 		 }
 		return null;
 	}
+
 }

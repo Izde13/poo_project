@@ -14,4 +14,21 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>src/resources/logoU.png</name>
+			<type>1</type>
+			<location>C:/Documents/Universidad/POO/1er_corte/poo_project/src/resources/logoU.png</location>
+		</link>
+		<link>
+			<name>src/resources/logoU2.jpg</name>
+			<type>1</type>
+			<location>C:/Documents/Universidad/POO/1er_corte/poo_project/src/resources/logoU2.jpg</location>
+		</link>
+		<link>
+			<name>src/resources/u3.jpg</name>
+			<type>1</type>
+			<location>C:/Documents/Universidad/POO/1er_corte/poo_project/src/resources/u3.jpg</location>
+		</link>
+	</linkedResources>
 </projectDescription>

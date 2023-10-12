@@ -29,9 +29,9 @@ public class MoneyRaiser {
 		AccountManager accountManager = new AccountManager();
 		String nameProduct = productManager.productNameById(idProduct);
 		String nameUser = accountManager.nameUserById(idUser);
-		System.out.println(" ------------------------------------------------");
-		System.out.println("|					Invoice ✅                   |");
-		System.out.println(" ------------------------------------------------");
+		System.out.println(" -------------------------------");
+		System.out.println("|			Invoice             |");
+		System.out.println(" -------------------------------");
 		System.out.println("* Id movement: " + this.idMovement);
 		System.out.println("* Id user: " + this.idUser);
 		System.out.println("* Name user: " + nameUser);
@@ -42,9 +42,8 @@ public class MoneyRaiser {
 		System.out.println("* Total cost: " + this.totalCost);
 		System.out.println("* Amount: " + this.amount);
 		System.out.println("* Payment type: " + this.paymentType);
-		System.out.println(" ------------------------------------------------");
-		System.out.println("|			Thanks for your purchase!    		 |");
-		System.out.println(" ------------------------------------------------");
+		System.out.println("Thanks for your purchase!");
+		
 	}
 
 	public int getIdMovement() {
