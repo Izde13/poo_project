@@ -3,7 +3,6 @@ package poo_project;
 import java.util.ArrayList;
 
 public class ProductManager {
-	//Aqui los administradores podran gestionar los productos
 	private static ArrayList<Product> listProducts = new ArrayList<Product>();
 	
 	public ProductManager() {
@@ -59,5 +58,44 @@ public class ProductManager {
 		 }
 		return null;
 	}
+	
+	Product productByName(String name) {
+        for (Product product : listProducts) {
+            if (product.getName().equals(name)) {
+                return product;
+            }
+        }
+		return null;
+	}
+	
+    public ArrayList<Product> getDrinkProducts() {
+        ArrayList<Product> drinkProducts = new ArrayList<>();
+        for (Product product : listProducts) {
+            if (product.getCategory().equals("Drinks")) {
+                drinkProducts.add(product);
+            }
+        }
+        return drinkProducts;
+    }
+    
+    public ArrayList<Product> getSaltySnacksProducts() {
+        ArrayList<Product> drinkProducts = new ArrayList<>();
+        for (Product product : listProducts) {
+            if (product.getCategory().equals("SaltySnacks")) {
+                drinkProducts.add(product);
+            }
+        }
+        return drinkProducts;
+    }
+    
+    public ArrayList<Product> getSweetSnacksProducts() {
+        ArrayList<Product> drinkProducts = new ArrayList<>();
+        for (Product product : listProducts) {
+            if (product.getCategory().equals("SweetSnacks")) {
+                drinkProducts.add(product);
+            }
+        }
+        return drinkProducts;
+    }
 
 }

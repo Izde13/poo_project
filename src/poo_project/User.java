@@ -8,15 +8,17 @@ public class User {
 	private int mobile;
 	private String role;
 	private String email;
+	private char[] password;
 
 
-	User(String firstName, String lastName, int idUser, int mobile, String role, String email){
+	User(String firstName, String lastName, int idUser, int mobile, String role, String email, char[] password){
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.idUser = idUser;
 		this.mobile = mobile;
 		this.role = role;
 		this.email = email;
+		this.password = password;
 	}
 	
 		
@@ -67,6 +69,9 @@ public class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
+	
+	public char[]  getPass() {
+		return password;
+	}
 
 }

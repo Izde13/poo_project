@@ -5,22 +5,31 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.text.NumberFormatter;
+
 import java.awt.Color;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.event.ActionListener;
+import java.text.NumberFormat;
+
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
 
 public class SendMoney extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-
+	private JFormattedTextField idDestination;
+	private JFormattedTextField amountToSend;
+	private JTextField emaiDestination;
+	JButton btnSend;
+	JButton btnCancel;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -41,6 +50,21 @@ public class SendMoney extends JFrame {
 	 * Create the frame.
 	 */
 	public SendMoney() {
+		
+		NumberFormat format = NumberFormat.getInstance();
+	    NumberFormatter formatter = new NumberFormatter(format);
+	    formatter.setValueClass(Double.class);
+	    formatter.setMinimum(0.0);
+	    formatter.setMaximum(Double.MAX_VALUE);
+	    formatter.setAllowsInvalid(false);
+	    
+	    NumberFormat intFormat = NumberFormat.getInstance();
+	    NumberFormatter intFormatter = new NumberFormatter(intFormat);
+	    intFormatter.setValueClass(Integer.class);
+	    intFormatter.setMinimum(0);
+	    intFormatter.setMaximum(Integer.MAX_VALUE);
+	    intFormatter.setAllowsInvalid(false);
+	    
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 728, 458);
 		contentPane = new JPanel();
@@ -51,97 +75,91 @@ public class SendMoney extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JPanel panel = new JPanel();
-		panel.setBackground(new Color(0, 128, 255));
-		panel.setBounds(0, 0, 712, 77);
-		contentPane.add(panel);
-		panel.setLayout(null);
-		
-		JButton btnNewButton = new JButton("Recharge");
-		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		btnNewButton.setBounds(120, 36, 89, 23);
-		panel.add(btnNewButton);
-		
-		JButton btnSendMoney = new JButton("Send money");
-		btnSendMoney.setBounds(234, 36, 105, 23);
-		panel.add(btnSendMoney);
-		
-		JLabel lblAccount = new JLabel("Account");
-		lblAccount.setFont(new Font("Tahoma", Font.BOLD, 13));
-		lblAccount.setBounds(388, 11, 54, 14);
-		panel.add(lblAccount);
-		
-		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setBounds(377, 36, 80, 22);
-		panel.add(comboBox_1);
-		comboBox_1.addItem("");
-		comboBox_1.addItem("Edit account");
-		comboBox_1.addItem("Exit");
-		
-		JButton btnNewButton_1_1 = new JButton("Purchase");
-		btnNewButton_1_1.setBounds(491, 36, 89, 23);
-		panel.add(btnNewButton_1_1);
-		
-		JButton btnNewButton_1_2 = new JButton("Balance");
-		btnNewButton_1_2.setBounds(613, 36, 89, 23);
-		panel.add(btnNewButton_1_2);
-		
-		JButton btnProducts = new JButton("Products");
-		btnProducts.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		btnProducts.setBounds(10, 36, 89, 23);
-		panel.add(btnProducts);
-		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(new Color(255, 255, 255));
-		panel_1.setBounds(0, 77, 712, 342);
+		panel_1.setBounds(0, 0, 712, 419);
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
 		
 		JPanel panel_2 = new JPanel();
-		panel_2.setBounds(170, 11, 359, 320);
+		panel_2.setBounds(133, 11, 441, 397);
 		panel_1.add(panel_2);
 		panel_2.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Send Money");
-		lblNewLabel.setBounds(127, 11, 102, 19);
+		lblNewLabel.setBounds(161, 11, 119, 23);
 		panel_2.add(lblNewLabel);
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 18));
 		
 		JLabel lblCurrentBalance = new JLabel("Amount to send");
 		lblCurrentBalance.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblCurrentBalance.setBounds(127, 63, 102, 19);
+		lblCurrentBalance.setBounds(161, 86, 102, 19);
 		panel_2.add(lblCurrentBalance);
 		
 		JLabel lblAmountToRecharge = new JLabel("Recipient identification");
 		lblAmountToRecharge.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblAmountToRecharge.setBounds(124, 127, 135, 19);
+		lblAmountToRecharge.setBounds(161, 168, 135, 19);
 		panel_2.add(lblAmountToRecharge);
 		
-		JButton btnNewButton_1 = new JButton("Send");
-		btnNewButton_1.setBackground(new Color(0, 128, 192));
-		btnNewButton_1.setBounds(140, 286, 89, 23);
-		panel_2.add(btnNewButton_1);
+		btnSend = new JButton("Send");
+		btnSend.setBackground(new Color(0, 128, 192));
+		btnSend.setBounds(106, 349, 89, 23);
+		panel_2.add(btnSend);
 		
-		textField = new JTextField();
-		textField.setBounds(114, 157, 160, 20);
-		panel_2.add(textField);
-		textField.setColumns(10);
+		idDestination = new JFormattedTextField(intFormatter);
+		idDestination.setBounds(148, 198, 160, 20);
+		panel_2.add(idDestination);
+		idDestination.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(114, 92, 145, 20);
-		panel_2.add(textField_1);
+		amountToSend = new JFormattedTextField(formatter);
+		amountToSend.setColumns(10);
+		amountToSend.setBounds(151, 116, 145, 20);
+		panel_2.add(amountToSend);
 		
 		JLabel lblEmailIdentification = new JLabel("Email identification");
 		lblEmailIdentification.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblEmailIdentification.setBounds(127, 197, 110, 19);
+		lblEmailIdentification.setBounds(170, 251, 110, 19);
 		panel_2.add(lblEmailIdentification);
 		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(114, 227, 160, 20);
-		panel_2.add(textField_2);
+		emaiDestination = new JTextField();
+		emaiDestination.setColumns(10);
+		emaiDestination.setBounds(148, 281, 160, 20);
+		panel_2.add(emaiDestination);
+		
+		btnCancel = new JButton("Cancel");
+		btnCancel.setForeground(new Color(255, 0, 0));
+		btnCancel.setBackground(new Color(0, 128, 192));
+		btnCancel.setBounds(258, 349, 89, 23);
+		panel_2.add(btnCancel);
 	}
+	
+	public int getId() {
+		return (int) idDestination.getValue();
+	}
+	
+	public double getAmountSend() {
+		return (double) amountToSend.getValue();
+	}
+	
+	public String getEmail() {
+		return emaiDestination.getText();
+	}
+	
+    public void showMessage(String mensaje) {
+        JOptionPane.showMessageDialog(this, mensaje);
+    }
 
-
+    public void clearForm() {
+        amountToSend.setText("");
+        idDestination.setText("");
+        emaiDestination.setText("");
+    }
+    
+    public void addSendListener(ActionListener listener) {
+    	btnSend.addActionListener(listener);
+    }
+    
+    public void addCancelSendListener(ActionListener listener) {
+    	btnCancel.addActionListener(listener);
+    }
 }

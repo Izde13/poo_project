@@ -1,12 +1,12 @@
 package poo_project;
 
 public class Account {
-	private double availablMoney;
+	private double availableMoney;
 	private User owner;
 	
 	
 	Account(User owner) {
-	    this.availablMoney = 0;
+	    this.availableMoney = 0;
 	    this.owner = owner;
 	}
 	  
@@ -14,12 +14,12 @@ public class Account {
 			
 	}
 	
-	public double getAvailablMoney() {
-		return availablMoney;
+	public double getAvailableMoney() {
+		return availableMoney;
 	}
 	
-	public void setAvailablMoney(double balance) {
-		this.availablMoney = balance;
+	public void setAvailableMoney(double balance) {
+		this.availableMoney = balance;
 	}
 	
 	public User getOwner() {

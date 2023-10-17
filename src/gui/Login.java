@@ -10,17 +10,23 @@ import javax.swing.JTextField;
 import javax.swing.DropMode;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import javax.swing.UIManager;
 import java.awt.Font;
 import javax.swing.JPasswordField;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Login extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JPasswordField pass;
-	private JTextField user;
+	private JTextField email;
+    private JButton btnSignIn;
+    JButton btnRegister;
+
 
 	/**
 	 * Launch the application.
@@ -42,6 +48,7 @@ public class Login extends JFrame {
 	 * Create the frame.
 	 */
 	public Login() {
+		setTitle("Log In");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 728, 458);
 		contentPane = new JPanel();
@@ -78,18 +85,18 @@ public class Login extends JFrame {
 		panel_1.add(pass);
 		pass.setColumns(10);
 		
-		user = new JTextField();
-		user.setBounds(103, 152, 228, 32);
-		panel_1.add(user);
-		user.setColumns(10);
+		email = new JTextField();
+		email.setBounds(103, 152, 228, 32);
+		panel_1.add(email);
+		email.setColumns(10);
 		
-		JButton btnSignIn = new JButton("Sign In");
-		btnSignIn.setForeground(new Color(0, 128, 192));
+		btnSignIn = new JButton("Sign In");
+		btnSignIn.setForeground(new Color(0, 0, 0));
 		btnSignIn.setBackground(new Color(0, 128, 192));
 		btnSignIn.setBounds(103, 333, 98, 23);
 		panel_1.add(btnSignIn);
 		
-		JLabel lblNewLabel_2 = new JLabel("User");
+		JLabel lblNewLabel_2 = new JLabel("Email");
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblNewLabel_2.setBounds(103, 119, 63, 32);
 		panel_1.add(lblNewLabel_2);
@@ -105,10 +112,36 @@ public class Login extends JFrame {
 		lblNewLabel_3.setBounds(103, 56, 48, 32);
 		panel_1.add(lblNewLabel_3);
 		
-		JButton btnRegister = new JButton("Register");
-		btnRegister.setForeground(new Color(0, 128, 192));
+		btnRegister = new JButton("Register");
+		btnRegister.setForeground(new Color(0, 0, 0));
 		btnRegister.setBackground(new Color(0, 128, 192));
 		btnRegister.setBounds(230, 333, 98, 23);
 		panel_1.add(btnRegister);
 	}
+	
+    public String getEmail() {
+        return email.getText();
+    }
+
+    public char[] getPassword() {
+        return pass.getPassword();
+    }
+    
+    public void addLoginListener(ActionListener listener) {
+        btnSignIn.addActionListener(listener);
+    }
+    
+    public void addRegisterListener(ActionListener listener) {
+        btnRegister.addActionListener(listener);
+    }
+    
+    public void showMessage(String mensaje) {
+        JOptionPane.showMessageDialog(this, mensaje);
+    }
+
+    public void clearForm() {
+        email.setText("");
+        pass.setText("");
+    }
 }
+

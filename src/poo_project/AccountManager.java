@@ -65,30 +65,74 @@ public class AccountManager {
 		 }
 	}
 	
-	User rechargeAccount(int id, double valueRecharge) {
-		for (int i = 0; i < listUsers.size(); i++) {
-		      if(listUsers.get(i).getIdUser() == id ) {
-		    	  listAccounts.get(i).setAvailablMoney(valueRecharge);
-		      } 
-		 }		
-		return null;
-	}
+    public static double getCurrentBalance() {
+        for (Account account : listAccounts) {
+            if (account.getOwner().equals(UserSession.getLoggedInUser())) {
+                double currentBalance = account.getAvailableMoney();
+                return currentBalance;
+            }
+        }
+		return 0;
+    }
+	
+    public static boolean rechargeAccount(User user, double rechargeAmount) {
+        for (Account account : listAccounts) {
+            if (account.getOwner().equals(user)) {
+                double currentBalance = account.getAvailableMoney();
+                double newBalance = currentBalance + rechargeAmount;
+                System.out.println("newBalance "+newBalance);
+                account.setAvailableMoney(newBalance);
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public static boolean transferMoney(int id, double rechargeAmount) {
+        for (Account account : listAccounts) {
+            if (account.getOwner().getIdUser() == id) {
+                double currentBalance = account.getAvailableMoney();
+                double newBalance = currentBalance + rechargeAmount;
+                System.out.println("newBalance "+newBalance);
+                account.setAvailableMoney(newBalance);
+                return true;
+            }
+        }
+        return false;
+    }
 	
 	void createMovement(int idUser,int idProduct,double costProduct, int amount, String paymentType) {
 		User user = editUserById(idUser);
-		double discount = 0;	
-		if(user.getRole().equals("Employee")) {
-			double discountPerProduct = 0;
-			discountPerProduct = costProduct * 0.1;
-			discount = discountPerProduct * amount;
-		}		
-		double valueIvaPerProduct = costProduct * 0.19;
-		double valueIva = valueIvaPerProduct * amount;
-		double totalCost = (costProduct * amount) - discount + valueIva;
+		double discount = getDiscount(user.getRole(), costProduct, amount);	
+		double valueIva = getIva(costProduct,amount);
+		double totalCost = getTotalCostPurchase(getTotalCostProduct(costProduct, amount),discount,valueIva);
 		int idMovement = listMoneyRaiser.size()+1;
 		MoneyRaiser newMovement = new MoneyRaiser(idMovement,idUser,idProduct,costProduct,discount,valueIva,totalCost,amount,paymentType);
 		listMoneyRaiser.add(newMovement);		
 		listMoneyRaiser.get(idMovement-1).generateBill();;
+	}
+	
+	double getDiscount(String role, double costProduct, int amount) {
+		double discount = 0;	
+		if(role.equals("Employee")) {
+			double discountPerProduct = 0;
+			discountPerProduct = costProduct * 0.1;
+			discount = discountPerProduct * amount;
+		}
+		return discount;	
+	}
+	
+	double getIva(double costProduct,int amount) {
+		double valueIvaPerProduct = costProduct * 0.19;
+		return valueIvaPerProduct * amount;
+	}
+	
+	double getTotalCostProduct(double costProduct, int amount) {
+		return costProduct * amount;
+	}
+	
+	double getTotalCostPurchase(double totalCost, double discount, double iva) {
+		return totalCost - discount + iva;
 	}
 	
 	String nameUserById(int id) {
@@ -107,5 +151,10 @@ public class AccountManager {
 		      } 
 		 }
 		return null;
+	}
+
+
+	public static ArrayList<User> getListUsers() {
+		return listUsers;
 	}
 }

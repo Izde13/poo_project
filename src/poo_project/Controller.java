@@ -81,10 +81,10 @@ public class Controller {
 		 }
 		 System.out.println("* Enter the email:                  ");		 
 		 String email = sn.next();
-		 User user = new User(firstName,lastName,idUser,mobile,role,email);
-		 AccountManager accountManager = new AccountManager();
-		 accountManager.createAccount(user);
-		 System.out.println("Account registered successfully! 😀 ");
+		 //User user = new User(firstName,lastName,idUser,mobile,role,email);
+		// AccountManager accountManager = new AccountManager();
+		 //accountManager.createAccount(user);
+		 //System.out.println("Account registered successfully! 😀 ");
 	 }
 	 
 	 void editUser(Scanner sn) {
@@ -157,7 +157,7 @@ public class Controller {
 			 System.out.println("* Please, enter the value to recharge: ");
 			 double newValue= sn.nextDouble();
 			 if(newValue != 0) {
-				 accountManager.rechargeAccount(id, newValue);
+				 //accountManager.rechargeAccount(id, newValue);
 				 System.out.println("* Account recharged successfully! 😀 ");
 			 } else {
 				 System.out.println("Sorry, the value cannot be zero");
@@ -184,9 +184,9 @@ public class Controller {
 			 int idProduct = sn.nextInt();
 			 System.out.println("* Enter the amount: ");
 			 int amount = sn.nextInt();
-			 Product product = new Product(idProduct, name, cost, amount);
-			 ProductManager productManager = new ProductManager();
-			 productManager.createProduct(product);
+			// Product product = new Product(idProduct, name, cost, amount);
+			// ProductManager productManager = new ProductManager();
+			// productManager.createProduct(product);
      		 System.out.println(" Product added successfully! 😀");
 		 } else {
 			 System.out.println("Sorry, you don't have the necessary permissions for this option");
