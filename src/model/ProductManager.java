@@ -1,4 +1,4 @@
-package poo_project;
+package model;
 
 import java.util.ArrayList;
 
@@ -13,7 +13,7 @@ public class ProductManager {
 		listProducts.add(newProduct);
 	}
 	
-	boolean findIdProduct(int id) {
+	public boolean findIdProduct(int id) {
 		 boolean result = false;
 		 for (int i = 0; i < listProducts.size(); i++) {
 		      if(listProducts.get(i).getIdProduct() == id ) {
@@ -23,7 +23,7 @@ public class ProductManager {
 		return result;
 	}
 	
-	Product editProductById(int id) {
+	public Product editProductById(int id) {
 		for (int i = 0; i < listProducts.size(); i++) {
 		      if(listProducts.get(i).getIdProduct() == id ) {
 		    	  return listProducts.get(i);
@@ -32,7 +32,7 @@ public class ProductManager {
 		return null;
 	}
 	
-	void deleteProduct(int id){
+	public void deleteProduct(int id){
 		for (int i = 0; i < listProducts.size(); i++) {
 		      if(listProducts.get(i).getIdProduct() == id ) {
 		    	  listProducts.remove(i);
@@ -40,17 +40,17 @@ public class ProductManager {
 		 }
 	}
 	
-	void showAllProducts() {
+	public void showAllProducts() {
 		for (int i = 0; i < listProducts.size(); i++) {
 			System.out.println(" + " + (i+1) + "." + "Product: " + listProducts.get(i).getName() + " - Cost: " + listProducts.get(i).getCost());
 		 }
 	}
 	
-	Product productByIndex(int index) {
+	public Product productByIndex(int index) {
 		return listProducts.get(index);
 	}
 	
-	String productNameById(int id) {
+	public String productNameById(int id) {
 		for (int i = 0; i < listProducts.size(); i++) {
 		      if(listProducts.get(i).getIdProduct() == id ) {
 		    	  return listProducts.get(i).getName();
@@ -59,7 +59,7 @@ public class ProductManager {
 		return null;
 	}
 	
-	Product productByName(String name) {
+	public Product productByName(String name) {
         for (Product product : listProducts) {
             if (product.getName().equals(name)) {
                 return product;

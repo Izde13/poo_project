@@ -18,9 +18,7 @@ public class MainPageController {
         view.addProductsButtonListener(new ProductsButtonListener());
         view.addRechargeAccountButtonListener(new RechargeAccountButtonListener());
         view.addTransferMoneyButtonListener(new TransferMoneyButtonListener());
-        view.addShowCartButtonListener(new ShowCartButtonListener());
         view.addExitButtonListener(new ExitButtonListener());
-
     }
     
     private class ProductsButtonListener implements ActionListener {
@@ -53,14 +51,7 @@ public class MainPageController {
         }
     }
     
-    private class ShowCartButtonListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-       
-        }
-    }
-    
-    
+   
     class ExitButtonListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {

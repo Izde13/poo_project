@@ -35,6 +35,7 @@ public class Register extends JFrame {
 	private JRadioButton employeeRole;
 	private JRadioButton adminRole;
 	JButton btnNewRegister;	
+	JButton btnCancelRegister;
 	/**
 	 * Launch the application.
 	 */
@@ -69,6 +70,13 @@ public class Register extends JFrame {
         formatter.setMinimum(0);
         formatter.setMaximum(Integer.MAX_VALUE);
         formatter.setAllowsInvalid(false);
+
+        NumberFormat mobileFormat = NumberFormat.getInstance();
+        NumberFormatter mobileFormatter = new NumberFormatter(mobileFormat);
+        mobileFormatter.setValueClass(Long.class);
+        mobileFormatter.setMinimum(0L);
+        mobileFormatter.setMaximum(Long.MAX_VALUE);
+        mobileFormatter.setAllowsInvalid(false);
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -118,7 +126,7 @@ public class Register extends JFrame {
 		btnNewRegister.setBounds(178, 385, 128, 23);
 		contentPane.add(btnNewRegister);
 		
-		JButton btnCancelRegister = new JButton("Cancel");
+		btnCancelRegister = new JButton("Cancel");
 		btnCancelRegister.setForeground(new Color(255, 0, 0));
 		btnCancelRegister.setBackground(new Color(255, 128, 128));
 		btnCancelRegister.setBounds(375, 385, 128, 23);
@@ -152,7 +160,7 @@ public class Register extends JFrame {
 		lblNewLabel_1_1_1.setBounds(178, 227, 91, 23);
 		contentPane.add(lblNewLabel_1_1_1);
 		
-		mobile = new JFormattedTextField(formatter);
+		mobile = new JFormattedTextField(mobileFormat);
 		mobile.setColumns(10);
 		mobile.setBounds(178, 250, 325, 23);
 		contentPane.add(mobile);
@@ -174,12 +182,6 @@ public class Register extends JFrame {
 		studentRole = new JRadioButton("Student");
 		studentRole.setBounds(412, 342, 91, 23);
 		contentPane.add(studentRole);
-		
-	    if (user != null) {
-	        setFieldsFromUser(user);
-	    } else {
-	        clearForm();
-	    }
 	}
 
 
@@ -207,8 +209,8 @@ public class Register extends JFrame {
 	}
 
 
-	public int getMobile() {
-		return (int) mobile.getValue();
+	public long getMobile() {
+		return (long) mobile.getValue();
 	}
 
     public boolean isAdminRoleSelected() {
@@ -235,8 +237,13 @@ public class Register extends JFrame {
         id.setText("");
         mobile.setText("");
     }
+    
     public void addRegisterListener(ActionListener listener) {
         btnNewRegister.addActionListener(listener);
+    }
+    
+    public void addCancelRegisterListener(ActionListener listener) {
+    	btnCancelRegister.addActionListener(listener);
     }
 	
 }

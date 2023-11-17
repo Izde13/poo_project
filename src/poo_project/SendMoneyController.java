@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 
 import gui.MainPage;
 import gui.SendMoney;
+import model.AccountManager;
 
 
 public class SendMoneyController {

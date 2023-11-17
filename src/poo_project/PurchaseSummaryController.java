@@ -9,6 +9,9 @@ import javax.swing.event.DocumentListener;
 
 import gui.MainPage;
 import gui.PurchaseSummary;
+import model.AccountManager;
+import model.Product;
+import model.User;
 
 public class PurchaseSummaryController {
 	

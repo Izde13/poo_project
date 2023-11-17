@@ -7,7 +7,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.NumberFormatter;
 
-import poo_project.AccountManager;
+import model.AccountManager;
 
 import java.awt.Color;
 import javax.swing.JLabel;
@@ -15,9 +15,7 @@ import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.text.NumberFormat;
 
-import javax.swing.JTextField;
 import javax.swing.JButton;
-import javax.swing.JList;
 import javax.swing.JComboBox;
 import java.awt.event.ActionEvent;
 
@@ -28,7 +26,6 @@ public class MainPage extends JFrame {
 	private JPanel contentPane;
     private JButton btnRecharge;
     private JButton btnSendMoney;
-    private JButton btnPurchase;
     private JButton btnProducts;
     private JLabel lblNewLabel;
     private JComboBox comboBox_1;
@@ -94,19 +91,15 @@ public class MainPage extends JFrame {
 		JLabel lblAccount = new JLabel("Account");
 		lblAccount.setForeground(new Color(255, 255, 255));
 		lblAccount.setFont(new Font("Tahoma", Font.BOLD, 13));
-		lblAccount.setBounds(405, 166, 54, 14);
+		lblAccount.setBounds(405, 162, 54, 14);
 		panel.add(lblAccount);
 		
 		comboBox_1 = new JComboBox();
-		comboBox_1.setBounds(405, 179, 109, 37);
+		comboBox_1.setBounds(405, 177, 109, 37);
 		panel.add(comboBox_1);
 		comboBox_1.addItem("");
 		comboBox_1.addItem("Edit account");
 		comboBox_1.addItem("Exit");
-		
-		btnPurchase = new JButton("Purchase");
-		btnPurchase.setBounds(405, 100, 109, 41);
-		panel.add(btnPurchase);
 		
 		btnProducts = new JButton("Products");
 		btnProducts.setFont(new Font("Tahoma", Font.PLAIN, 11));
@@ -122,15 +115,16 @@ public class MainPage extends JFrame {
 		JLabel lblNewLabel_1 = new JLabel("Balance");
 		lblNewLabel_1.setForeground(new Color(255, 255, 255));
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblNewLabel_1.setBounds(405, 263, 109, 14);
+		lblNewLabel_1.setBounds(405, 100, 109, 14);
 		panel.add(lblNewLabel_1);
 		
 		labelBalance = new JLabel("");
 		labelBalance.setForeground(new Color(0, 0, 0));
 		labelBalance.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		labelBalance.setBounds(405, 288, 109, 14);
+		labelBalance.setBounds(405, 125, 109, 14);
 		panel.add(labelBalance);
-        double newCurrentBalance = AccountManager.getCurrentBalance();
+		AccountManager accountManager = new AccountManager(); 
+        double newCurrentBalance = accountManager.getCurrentBalance();
         setCurrentBalance(newCurrentBalance);	
 	}
 	
@@ -144,10 +138,6 @@ public class MainPage extends JFrame {
     
     public void addTransferMoneyButtonListener(ActionListener listener) {
         btnSendMoney.addActionListener(listener);
-    }
-    
-    public void addShowCartButtonListener(ActionListener listener) {
-        btnPurchase.addActionListener(listener);
     }
     
     public JComboBox<String> getComboBox() {

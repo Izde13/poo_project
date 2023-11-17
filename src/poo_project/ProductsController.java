@@ -8,6 +8,8 @@ import javax.swing.JComboBox;
 import gui.MainPage;
 import gui.Products;
 import gui.PurchaseSummary;
+import model.Product;
+import model.ProductManager;
 
 public class ProductsController {
 	private Products view;

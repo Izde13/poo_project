@@ -5,6 +5,8 @@ import java.awt.event.ActionListener;
 import gui.Login;
 import gui.MainPage;
 import gui.Register;
+import model.AccountManager;
+import model.User;
 
 public class LoginController {
 	private Login view;
@@ -46,7 +48,8 @@ public class LoginController {
     }
 
     private boolean validarCredenciales(String email, char[] password) {
-        for (User user : AccountManager.getListUsers()) {
+    	AccountManager accountManager = new AccountManager();
+        for (User user : accountManager.getListUsers()) {
             if (user.getEmail().equals(email)) {
                 char[] storedPassword = user.getPass();
                 String enteredPassword = new String(password);
@@ -60,7 +63,8 @@ public class LoginController {
     }
     
     private User getUser(String email) {
-        for (User user : AccountManager.getListUsers()) {
+    	AccountManager accountManager = new AccountManager();
+        for (User user : accountManager.getListUsers()) {
             if (user.getEmail().equals(email)) {
                 return user;
             }

@@ -1,5 +1,7 @@
 package poo_project;
 
+import model.User;
+
 public class UserSession {
     private static User loggedInUser;
 

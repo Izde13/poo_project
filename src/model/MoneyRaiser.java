@@ -1,4 +1,4 @@
-package poo_project;
+package model;
 
 public class MoneyRaiser {
 

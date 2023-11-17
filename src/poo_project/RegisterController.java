@@ -5,6 +5,8 @@ import java.awt.event.ActionListener;
 
 import gui.Login;
 import gui.Register;
+import model.AccountManager;
+import model.User;
 
 public class RegisterController {
 	
@@ -14,6 +16,7 @@ public class RegisterController {
     public RegisterController(Register registerView) {
         this.registerView = registerView;
         this.registerView.addRegisterListener(new RegisterListener());
+        this.registerView.addCancelRegisterListener(new CancelRegisterListener());
     }
     
     class RegisterListener implements ActionListener {
@@ -22,13 +25,13 @@ public class RegisterController {
             String firstName = registerView.getFirstName();
             String lastName = registerView.getLastName();
             int id = registerView.getId();
-            int mobile = registerView.getMobile();
+            long mobile = registerView.getMobile();
             String email = registerView.getEmail();
             char[] password = registerView.getPass();
             String selectedRole = "";
 
             if (registerView.isAdminRoleSelected()) {
-                selectedRole = "Admin";
+                selectedRole = "Admin"; 
             } else if (registerView.isEmployeeRoleSelected()) {
                 selectedRole = "Employee";
             } else if (registerView.isStudentRoleSelected()) {
@@ -44,11 +47,11 @@ public class RegisterController {
             System.out.println("Password: " + password);
             System.out.println("Role: " + selectedRole);
 
-            User user = new User(firstName,lastName,id,mobile,selectedRole,email,password);
-   		 	AccountManager accountManager = new AccountManager();
-   		 	accountManager.createAccount(user);
+	   		AccountManager accountManager = new AccountManager();
    		 	boolean isValidUser = accountManager.findIdUser(id);
-   			if(isValidUser) {
+   			if(!isValidUser) {
+   				User user = new User(firstName,lastName,id,mobile,selectedRole,email,password);
+   	   		 	accountManager.createAccount(user);
    				registerView.showMessage("Register succesful");
    				registerView.clearForm();
    				Login loginView = new Login();
@@ -58,6 +61,17 @@ public class RegisterController {
    			} else {
    				registerView.showMessage("Register failed");
    			}
+        }
+    }
+    
+    class CancelRegisterListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+     		registerView.clearForm();
+			Login loginView = new Login();
+			LoginController loginController = new LoginController(loginView);
+			loginView.setVisible(true);
+			registerView.dispose();
         }
     }
 

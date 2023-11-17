@@ -1,17 +1,17 @@
-package poo_project;
+package model;
 
 public class User {
 
 	private String firstName;
 	private String lastName;
 	private int idUser;
-	private int mobile;
+	private long mobile;
 	private String role;
 	private String email;
 	private char[] password;
 
 
-	User(String firstName, String lastName, int idUser, int mobile, String role, String email, char[] password){
+	public User(String firstName, String lastName, int idUser, long mobile, String role, String email, char[] password){
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.idUser = idUser;
@@ -46,11 +46,11 @@ public class User {
 		this.idUser = idUser;
 	}
 
-	public int getMobile() {
+	public long getMobile() {
 		return mobile;
 	}
 
-	public void setMobile(int mobile) {
+	public void setMobile(long mobile) {
 		this.mobile = mobile;
 	}
 

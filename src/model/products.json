@@ -1,0 +1,142 @@
+[
+    {
+        "idProduct": 1,
+        "name": "Potato chips",
+        "cost": 295.29,
+        "category": "Salty snacks",
+        "quantityAvailable": 3
+    },
+    {
+        "idProduct": 2,
+        "name": "Red Bull",
+        "cost": 423.36,
+        "category": "Drinks",
+        "quantityAvailable": 6
+    },
+    {
+        "idProduct": 3,
+        "name": "Chocolate bar",
+        "cost": 853.63,
+        "category": "Sweet snacks",
+        "quantityAvailable": 19
+    },
+    {
+        "idProduct": 4,
+        "name": "Tortilla chips",
+        "cost": 821.48,
+        "category": "Salty snacks",
+        "quantityAvailable": 20
+    },
+    {
+        "idProduct": 5,
+        "name": "Gummy bears",
+        "cost": 674.61,
+        "category": "Sweet snacks",
+        "quantityAvailable": 9
+    },
+    {
+        "idProduct": 6,
+        "name": "Gatorade",
+        "cost": 440.64,
+        "category": "Drinks",
+        "quantityAvailable": 14
+    },
+    {
+        "idProduct": 7,
+        "name": "Skittles",
+        "cost": 381.71,
+        "category": "Sweet snacks",
+        "quantityAvailable": 1
+    },
+    {
+        "idProduct": 8,
+        "name": "Mountain Dew",
+        "cost": 717.83,
+        "category": "Drinks",
+        "quantityAvailable": 10
+    },
+    {
+        "idProduct": 9,
+        "name": "Popcorn",
+        "cost": 951.89,
+        "category": "Salty snacks",
+        "quantityAvailable": 13
+    },
+    {
+        "idProduct": 10,
+        "name": "Yogurt",
+        "cost": 386.11,
+        "category": "Drinks",
+        "quantityAvailable": 17
+    },
+    {
+        "idProduct": 11,
+        "name": "Oreos",
+        "cost": 947.97,
+        "category": "Sweet snacks",
+        "quantityAvailable": 17
+    },
+    {
+        "idProduct": 12,
+        "name": "Veggie straws",
+        "cost": 119.48,
+        "category": "Salty snacks",
+        "quantityAvailable": 3
+    },
+    {
+        "idProduct": 13,
+        "name": "Sprite",
+        "cost": 885.34,
+        "category": "Drinks",
+        "quantityAvailable": 14
+    },
+    {
+        "idProduct": 14,
+        "name": "Trail mix ",
+        "cost": 533.16,
+        "category": "Salty snacks",
+        "quantityAvailable": 19
+    },
+    {
+        "idProduct": 15,
+        "name": "Almonds",
+        "cost": 646.67,
+        "category": "Salty snacks",
+        "quantityAvailable": 9
+    },
+    {
+        "idProduct": 16,
+        "name": "Jelly beans",
+        "cost": 621.21,
+        "category": "Sweet snacks",
+        "quantityAvailable": 11
+    },
+    {
+        "idProduct": 17,
+        "name": "Granola bars",
+        "cost": 102.8,
+        "category": "Salty snacks",
+        "quantityAvailable": 12
+    },
+    {
+        "idProduct": 18,
+        "name": "Kit Kat",
+        "cost": 991.79,
+        "category": "Sweet snacks",
+        "quantityAvailable": 12
+    },
+    {
+        "idProduct": 19,
+        "name": "Twix",
+        "cost": 82.13,
+        "category": "Sweet snacks",
+        "quantityAvailable": 12
+    },
+    {
+        "idProduct": 20,
+        "name": "Fanta",
+        "cost": 792.72,
+        "category": "Drinks",
+        "quantityAvailable": 11
+    }
+]

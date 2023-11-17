@@ -4,8 +4,10 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import poo_project.Product;
-import poo_project.ProductManager;
+
+import model.Product;
+import model.ProductManager;
+
 import java.awt.Color;
 import javax.swing.JLabel;
 import java.awt.Font;

@@ -1,26 +1,34 @@
-package poo_project;
+package model;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import poo_project.UserSession;
 
 public class AccountManager {
 
-	private static ArrayList<User> listUsers = new ArrayList<User>();
-	private static ArrayList<Account> listAccounts = new ArrayList<Account>();
+	//private static ArrayList<User> listUsers = new ArrayList<User>();
+	private static List<User> listUsers = new ArrayList<User>();
+	private static List<Account> listAccounts = new ArrayList<Account>();
 	private static ArrayList<MoneyRaiser> listMoneyRaiser = new ArrayList<MoneyRaiser>();
 
 	
-	AccountManager(){
-	}
+	public AccountManager(){
+        this.listUsers = JsonFileManager.readUsersFromFile("C:\\Documents\\Universidad\\POO\\1er_corte\\poo_project\\src\\model\\users.json");
+        this.listAccounts = JsonFileManager.readAccountFromFile("C:\\Documents\\Universidad\\POO\\1er_corte\\poo_project\\src\\model\\account.json");
+    }
 
 	
-	void createAccount(User newUser){
+	public void createAccount(User newUser){
 		listUsers.add(newUser);
 		Account newAccount = new Account(newUser);
 		listAccounts.add(newAccount);
+		JsonFileManager.writeUsersToFile(listUsers);
+		JsonFileManager.writeAccountToFile(listAccounts);
 	}
 	
 	
-	boolean findIdUser(int id) {
+	public boolean findIdUser(int id) {
 		 boolean result = false;
 		 for (int i = 0; i < listUsers.size(); i++) {
 		      if(listUsers.get(i).getIdUser() == id ) {
@@ -65,9 +73,9 @@ public class AccountManager {
 		 }
 	}
 	
-    public static double getCurrentBalance() {
+    public double getCurrentBalance() {
         for (Account account : listAccounts) {
-            if (account.getOwner().equals(UserSession.getLoggedInUser())) {
+            if (account.getOwner().getIdUser() == UserSession.getLoggedInUser().getIdUser()) {
                 double currentBalance = account.getAvailableMoney();
                 return currentBalance;
             }
@@ -93,7 +101,6 @@ public class AccountManager {
             if (account.getOwner().getIdUser() == id) {
                 double currentBalance = account.getAvailableMoney();
                 double newBalance = currentBalance + rechargeAmount;
-                System.out.println("newBalance "+newBalance);
                 account.setAvailableMoney(newBalance);
                 return true;
             }
@@ -101,7 +108,7 @@ public class AccountManager {
         return false;
     }
 	
-	void createMovement(int idUser,int idProduct,double costProduct, int amount, String paymentType) {
+	public void createMovement(int idUser,int idProduct,double costProduct, int amount, String paymentType) {
 		User user = editUserById(idUser);
 		double discount = getDiscount(user.getRole(), costProduct, amount);	
 		double valueIva = getIva(costProduct,amount);
@@ -112,7 +119,7 @@ public class AccountManager {
 		listMoneyRaiser.get(idMovement-1).generateBill();;
 	}
 	
-	double getDiscount(String role, double costProduct, int amount) {
+	public double getDiscount(String role, double costProduct, int amount) {
 		double discount = 0;	
 		if(role.equals("Employee")) {
 			double discountPerProduct = 0;
@@ -122,16 +129,16 @@ public class AccountManager {
 		return discount;	
 	}
 	
-	double getIva(double costProduct,int amount) {
+	public double getIva(double costProduct,int amount) {
 		double valueIvaPerProduct = costProduct * 0.19;
 		return valueIvaPerProduct * amount;
 	}
 	
-	double getTotalCostProduct(double costProduct, int amount) {
+	public double getTotalCostProduct(double costProduct, int amount) {
 		return costProduct * amount;
 	}
 	
-	double getTotalCostPurchase(double totalCost, double discount, double iva) {
+	public double getTotalCostPurchase(double totalCost, double discount, double iva) {
 		return totalCost - discount + iva;
 	}
 	
@@ -154,7 +161,7 @@ public class AccountManager {
 	}
 
 
-	public static ArrayList<User> getListUsers() {
+	public List<User> getListUsers() {
 		return listUsers;
 	}
 }

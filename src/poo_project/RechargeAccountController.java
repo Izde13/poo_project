@@ -5,6 +5,8 @@ import java.awt.event.ActionListener;
 
 import gui.MainPage;
 import gui.RechargeAccount;
+import model.AccountManager;
+import model.User;
 
 public class RechargeAccountController {
 	private RechargeAccount view;

@@ -7,7 +7,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.NumberFormatter;
 
-import poo_project.AccountManager;
+import model.AccountManager;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -107,7 +107,8 @@ public class RechargeAccount extends JFrame {
 		currentBalance = new JLabel("");
 		currentBalance.setBounds(143, 152, 115, 14);
 		panel_2.add(currentBalance);
-        double newCurrentBalance = AccountManager.getCurrentBalance();
+		AccountManager accountManager = new AccountManager(); 
+        double newCurrentBalance = accountManager.getCurrentBalance();
         setCurrentBalance(newCurrentBalance);	
         
 		btnCancelRecharge = new JButton("Cancel");
