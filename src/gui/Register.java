@@ -7,6 +7,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.NumberFormatter;
 
+import model.User;
+
 import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -34,6 +36,8 @@ public class Register extends JFrame {
 	private JRadioButton studentRole;
 	private JRadioButton employeeRole;
 	private JRadioButton adminRole;
+	private JButton togglePasswordButton;
+
 	JButton btnNewRegister;	
 	JButton btnCancelRegister;
 	/**
@@ -120,7 +124,7 @@ public class Register extends JFrame {
 		email.setBounds(178, 299, 325, 23);
 		contentPane.add(email);
 		
-		btnNewRegister = new JButton("Register");
+		btnNewRegister = new JButton("Save");
 		btnNewRegister.setForeground(new Color(0, 64, 128));
 		btnNewRegister.setBackground(new Color(0, 128, 255));
 		btnNewRegister.setBounds(178, 385, 128, 23);
@@ -182,6 +186,11 @@ public class Register extends JFrame {
 		studentRole = new JRadioButton("Student");
 		studentRole.setBounds(412, 342, 91, 23);
 		contentPane.add(studentRole);
+		
+		togglePasswordButton = new JButton("Show Password");
+		togglePasswordButton.setBounds(510, 205, 161, 23);
+		contentPane.add(togglePasswordButton);
+		
 	}
 
 
@@ -236,6 +245,9 @@ public class Register extends JFrame {
         email.setText("");
         id.setText("");
         mobile.setText("");
+        adminRole.setSelected(false);
+        employeeRole.setSelected(false);
+        studentRole.setSelected(false);
     }
     
     public void addRegisterListener(ActionListener listener) {
@@ -245,5 +257,33 @@ public class Register extends JFrame {
     public void addCancelRegisterListener(ActionListener listener) {
     	btnCancelRegister.addActionListener(listener);
     }
-	
+    
+    
+    public void loadUserData(User user) {
+    	firstName.setText(user.getFirstName());
+    	lastName.setText(user.getLastName());
+        String password = new String(user.getPass());
+        System.out.println("password" + password);
+        pass.setText(password);    	
+        email.setText(user.getEmail());
+        id.setValue(user.getIdUser());
+        mobile.setValue(user.getMobile());
+        if(user.getRole().equals("Admin")) adminRole.setSelected(true);
+        if(user.getRole().equals("Student")) studentRole.setSelected(true);
+        if(user.getRole().equals("Employee")) employeeRole.setSelected(true);
+    }
+    
+    public void addTogglePasswordListener(ActionListener listener) {
+    	togglePasswordButton.addActionListener(listener);
+    }
+    
+    
+    public void setEchoChar(char c) {
+        pass.setEchoChar(c);
+    }
+
+    public void setTogglePasswordButtonText(String text) {
+        togglePasswordButton.setText(text);
+    }    
+
 }

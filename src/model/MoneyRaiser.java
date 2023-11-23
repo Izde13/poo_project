@@ -116,8 +116,6 @@ public class MoneyRaiser {
 
 	public void setPaymentType(String paymentType) {
 		this.paymentType = paymentType;
-	}
-	
-	
+	}	
 	
 }

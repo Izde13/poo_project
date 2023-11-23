@@ -2,8 +2,11 @@ package poo_project;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import gui.Login;
+import gui.MainPage;
 import gui.Register;
 import model.AccountManager;
 import model.User;
@@ -11,12 +14,17 @@ import model.User;
 public class RegisterController {
 	
     private Register registerView;
+    private boolean isEditUser = false;
+    private boolean isPasswordVisible = false;
 
 	
-    public RegisterController(Register registerView) {
+    public RegisterController(Register registerView, boolean isEditUser) {
         this.registerView = registerView;
         this.registerView.addRegisterListener(new RegisterListener());
         this.registerView.addCancelRegisterListener(new CancelRegisterListener());
+        this.registerView.addTogglePasswordListener(new TogglePasswordListener());
+
+        this.isEditUser = isEditUser;
     }
     
     class RegisterListener implements ActionListener {
@@ -49,29 +57,85 @@ public class RegisterController {
 
 	   		AccountManager accountManager = new AccountManager();
    		 	boolean isValidUser = accountManager.findIdUser(id);
-   			if(!isValidUser) {
-   				User user = new User(firstName,lastName,id,mobile,selectedRole,email,password);
-   	   		 	accountManager.createAccount(user);
-   				registerView.showMessage("Register succesful");
-   				registerView.clearForm();
-   				Login loginView = new Login();
-   				LoginController loginController = new LoginController(loginView);
-   				loginView.setVisible(true);
-   				registerView.dispose();
-   			} else {
-   				registerView.showMessage("Register failed");
-   			}
+   		 	User user = new User(firstName,lastName,id,mobile,selectedRole,email,password);
+   		 	
+   		 	if(!isValidEmail(email)) {
+   		 		registerView.showMessage("Invalid email");
+   		 	} else {
+   	   			if(!isValidUser && !isEditUser) {
+   	   				createUser(user, accountManager);
+   	   			}
+   	   			
+   	   			if(isEditUser) {
+   	   				editUser(user, accountManager);
+   	   			}
+   		 	}
+   		 	
+
         }
     }
     
     class CancelRegisterListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-     		registerView.clearForm();
-			Login loginView = new Login();
-			LoginController loginController = new LoginController(loginView);
-			loginView.setVisible(true);
+        	registerView.clearForm();
+        	if(isEditUser) {
+        		MainPage mainPage = new MainPage();
+        		MainPageController mainPageController = new MainPageController(mainPage);
+        		mainPage.setVisible(true);
+        	} else {
+        		Login loginView = new Login();
+        		LoginController loginController = new LoginController(loginView);
+        		loginView.setVisible(true);        		
+        	}
 			registerView.dispose();
+        }
+    }
+    
+    public void createUser(User user, AccountManager accountManager) {
+    	accountManager.createAccount(user);
+		registerView.showMessage("Register succesful");
+		registerView.clearForm();
+		Login loginView = new Login();
+		LoginController loginController = new LoginController(loginView);
+		loginView.setVisible(true);
+		registerView.dispose();
+    }
+    
+    public void editUser(User user, AccountManager accountManager) {
+    	accountManager.editUser(user);
+		registerView.showMessage("Register succesful");
+		registerView.clearForm();
+		MainPage mainPageView = new MainPage();
+		MainPageController mainPageController = new MainPageController(mainPageView);
+		mainPageView.setVisible(true);
+		registerView.dispose();
+    }
+    
+    private boolean isValidEmail(String email) {
+        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
+        Pattern pattern = Pattern.compile(emailRegex);
+        Matcher matcher = pattern.matcher(email);
+        return matcher.matches();
+    }
+    
+    class TogglePasswordListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            togglePasswordVisibility();
+        }
+    }
+    
+    private void togglePasswordVisibility() {
+    	System.out.println("isPasswordVisible" + isPasswordVisible);
+        if (isPasswordVisible) {
+            registerView.setEchoChar('\u2022');
+            isPasswordVisible = false;
+            registerView.setTogglePasswordButtonText("Show Password");
+        } else {
+            registerView.setEchoChar((char) 0);
+            isPasswordVisible = true;
+            registerView.setTogglePasswordButtonText("Hide Password");
         }
     }
 

@@ -89,7 +89,7 @@ public class PurchaseSummary extends JFrame {
 		
 		labelNameProduct = new JLabel("");
 		labelNameProduct.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		labelNameProduct.setBounds(176, 95, 46, 14);
+		labelNameProduct.setBounds(174, 95, 132, 20);
 		panel.add(labelNameProduct);
 		
 		JLabel lblNewLabel_1_2 = new JLabel("Amount");
@@ -99,7 +99,7 @@ public class PurchaseSummary extends JFrame {
 		
 		labelCategoryProduct = new JLabel("");
 		labelCategoryProduct.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		labelCategoryProduct.setBounds(176, 144, 46, 14);
+		labelCategoryProduct.setBounds(176, 144, 110, 14);
 		panel.add(labelCategoryProduct);
 		
 		JLabel lblNewLabel_1_3 = new JLabel("Category");
@@ -183,7 +183,7 @@ public class PurchaseSummary extends JFrame {
 		
 		labelTotalPurchase = new JLabel("");
 		labelTotalPurchase.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		labelTotalPurchase.setBounds(196, 290, 72, 14);
+		labelTotalPurchase.setBounds(196, 290, 93, 14);
 		panel_1.add(labelTotalPurchase);
 		
 		btnSubmit = new JButton("Submit");

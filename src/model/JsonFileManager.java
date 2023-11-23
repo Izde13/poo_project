@@ -10,7 +10,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import com.google.gson.annotations.Expose;
 import com.google.gson.reflect.TypeToken;
 
 public class JsonFileManager {
@@ -62,6 +61,17 @@ public class JsonFileManager {
 	     return accountList;
 	 }
 	 
+	 public static List<Product> readProductsFromFile(String pathFile) {
+		 List<Product> productList = new ArrayList<>();
+	     try (FileReader reader = new FileReader(pathFile)) {
+	    	 Gson gson = new Gson();
+	    	 productList = gson.fromJson(reader, new TypeToken<List<Product>>(){}.getType());
+	     } catch (IOException e) {
+	    	 e.printStackTrace();
+	     }
+	     return productList;
+	 }	 
+	 
 	 public static void writeUsersToFile(List<User> userList) {
 	    JsonArray jsonArray = new JsonArray();
 	    String pathFile = "C:\\Documents\\Universidad\\POO\\1er_corte\\poo_project\\src\\model\\users.json";
@@ -83,7 +93,7 @@ public class JsonFileManager {
 	    try (FileWriter fileWriter = new FileWriter(pathFile)) {
 	        String jsonOutput = gson.toJson(jsonArray);
 	        fileWriter.write(jsonOutput);
-	        System.out.println("Ok write");
+	        System.out.println("Ok write user");
 	    } catch (IOException e) {
 	        e.printStackTrace();
 	    }
@@ -101,7 +111,41 @@ public class JsonFileManager {
 	    try (FileWriter fileWriter = new FileWriter(pathFile)) {
 	        String jsonOutput = gson.toJson(jsonArray);
 	        fileWriter.write(jsonOutput);
-	        System.out.println("Ok write");
+	        System.out.println("Ok write account");
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
+	}
+	
+	public static void writeProductToFile(List<Product> productList) {
+		JsonArray jsonArray = new JsonArray();
+		String pathFile = "C:\\Documents\\Universidad\\POO\\1er_corte\\poo_project\\src\\model\\products.json";
+	    Gson gson = new GsonBuilder().setPrettyPrinting().create();
+	    for (Product product : productList) {
+	        String productJson = gson.toJson(product);
+	        jsonArray.add(gson.fromJson(productJson, JsonObject.class));
+	    }
+	    try (FileWriter fileWriter = new FileWriter(pathFile)) {
+	        String jsonOutput = gson.toJson(jsonArray);
+	        fileWriter.write(jsonOutput);
+	        System.out.println("Ok write product");
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
+	}
+	
+	public static void writeMovementsToFile(List<MoneyRaiser> listMoneyRaiser) {
+		JsonArray jsonArray = new JsonArray();
+		String pathFile = "C:\\Documents\\Universidad\\POO\\1er_corte\\poo_project\\src\\model\\MoneyRaiser.json";
+	    Gson gson = new GsonBuilder().setPrettyPrinting().create();
+	    for (MoneyRaiser moneyRaiser : listMoneyRaiser) {
+	        String moneyRaiserJson = gson.toJson(moneyRaiser);
+	        jsonArray.add(gson.fromJson(moneyRaiserJson, JsonObject.class));
+	    }
+	    try (FileWriter fileWriter = new FileWriter(pathFile)) {
+	        String jsonOutput = gson.toJson(jsonArray);
+	        fileWriter.write(jsonOutput);
+	        System.out.println("Ok write movement");
 	    } catch (IOException e) {
 	        e.printStackTrace();
 	    }

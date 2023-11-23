@@ -1,0 +1,13 @@
+[
+  {
+    "idMovement": 1,
+    "idUser": 123789,
+    "idProduct": 2,
+    "costProduct": 423.36,
+    "discount": 0.0,
+    "valueIva": 80.4384,
+    "totalCost": 503.7984,
+    "amount": 1,
+    "paymentType": "Money in account"
+  }
+]

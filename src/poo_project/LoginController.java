@@ -4,6 +4,7 @@ import java.awt.event.ActionListener;
 
 import gui.Login;
 import gui.MainPage;
+import gui.MainPageAdmin;
 import gui.Register;
 import model.AccountManager;
 import model.User;
@@ -26,9 +27,16 @@ public class LoginController {
                 view.showMessage("Log In succesful");
                 User loggedInUser = getUser(email);
                 UserSession.setLoggedInUser(loggedInUser);
-                MainPage landingPage = new MainPage();
-                MainPageController landingPageController = new MainPageController(landingPage);
-                landingPage.setVisible(true);
+                System.out.println("UserSession" + UserSession.getLoggedInUser().getRole());
+                if(UserSession.getLoggedInUser().getRole().equals("Student") || UserSession.getLoggedInUser().getRole().equals("Employee")) {
+                	MainPage landingPage = new MainPage();
+                	MainPageController landingPageController = new MainPageController(landingPage);
+                	landingPage.setVisible(true);                	
+                } else {
+                	MainPageAdmin landiginAdminPage = new MainPageAdmin();
+                	MainPageAdminController landiginAdminPageController = new MainPageAdminController(landiginAdminPage);
+                	landiginAdminPage.setVisible(true);
+                }
                 view.dispose();
             } else {
                 view.showMessage("Log In failed");
@@ -41,7 +49,7 @@ public class LoginController {
         @Override
         public void actionPerformed(ActionEvent e) {
             Register registerView = new Register();
-            RegisterController registerController = new RegisterController(registerView);
+            RegisterController registerController = new RegisterController(registerView,false);
             registerView.setVisible(true);
             view.dispose();
         }

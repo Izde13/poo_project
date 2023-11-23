@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import gui.MainPage;
 import gui.SendMoney;
 import model.AccountManager;
+import model.User;
 
 
 public class SendMoneyController {
@@ -20,20 +21,18 @@ public class SendMoneyController {
     class SendListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-             double amountSend = view.getAmountSend();
-             int idDestination = view.getId();
-             String emailDestination = view.getEmail();
-             
-             boolean successfulRecharge = AccountManager.transferMoney(idDestination, amountSend);
-             
-             if (successfulRecharge) {
+        	double amountSend = view.getAmountSend();
+            int idDestination = view.getId();
+            boolean isSufficientBalance = AccountManager.validateBalance(amountSend);             
+             if (!isSufficientBalance) {
+            	 AccountManager.transferMoney(idDestination, amountSend);
                  view.showMessage("Sending of money successfully");
                  MainPage mainPage = new MainPage();
                  MainPageController MainPageController = new MainPageController(mainPage);
                  mainPage.setVisible(true);
        			 view.dispose();
              } else {
-                 view.showMessage("Sending of money failed");
+                 view.showMessage("Insufficient balance");
              }        
         }
     }

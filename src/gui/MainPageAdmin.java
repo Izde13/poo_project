@@ -21,11 +21,12 @@ public class MainPageAdmin extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-    private JButton btnManageAccount;
     private JButton btnDeleteProduct;
     private JButton btnCreateProduct;
     private JButton btnEditProduct;
     private JLabel lblNewLabel;
+    private JComboBox comboBox_1;
+
 
 	/**
 	 * Launch the application.
@@ -70,26 +71,21 @@ public class MainPageAdmin extends JFrame {
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
-		btnManageAccount = new JButton("Manage account");
-		btnManageAccount.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		btnManageAccount.setBounds(397, 221, 117, 41);
-		panel.add(btnManageAccount);
-		
 		btnDeleteProduct = new JButton("Delete product");
 		btnDeleteProduct.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnDeleteProduct.setBounds(397, 159, 117, 41);
+		btnDeleteProduct.setBounds(397, 202, 117, 41);
 		panel.add(btnDeleteProduct);
 		
 		btnCreateProduct = new JButton("Create product");
-		btnCreateProduct.setBounds(397, 26, 117, 41);
+		btnCreateProduct.setBounds(397, 26, 137, 41);
 		panel.add(btnCreateProduct);
 		
 		btnEditProduct = new JButton("Edit product");
 		btnEditProduct.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		btnEditProduct.setBounds(397, 87, 117, 41);
+		btnEditProduct.setBounds(397, 113, 117, 41);
 		panel.add(btnEditProduct);
 		
 		lblNewLabel = new JLabel("Panel admin");
@@ -98,9 +94,12 @@ public class MainPageAdmin extends JFrame {
 		lblNewLabel.setBounds(72, 150, 187, 64);
 		panel.add(lblNewLabel);
 		
-		JComboBox<String> comboBox_1 = new JComboBox();
-		comboBox_1.setBounds(397, 292, 117, 37);
+		comboBox_1 = new JComboBox();
+		comboBox_1.setBounds(397, 294, 109, 37);
 		panel.add(comboBox_1);
+		comboBox_1.addItem("");
+		comboBox_1.addItem("Edit account");
+		comboBox_1.addItem("Exit");
 		
 		JLabel lblAccount = new JLabel("Account");
 		lblAccount.setForeground(Color.WHITE);
@@ -111,29 +110,26 @@ public class MainPageAdmin extends JFrame {
         double newCurrentBalance = accountManager.getCurrentBalance();        setCurrentBalance(newCurrentBalance);	
 	}
 	
-    public void addProductsButtonListener(ActionListener listener) {
+    public void addEditProductButtonListener(ActionListener listener) {
         btnEditProduct.addActionListener(listener);
     }
     
-    public void addRechargeAccountButtonListener(ActionListener listener) {
-        btnManageAccount.addActionListener(listener);
-    }
-    
-    public void addTransferMoneyButtonListener(ActionListener listener) {
+
+    public void addDeleteProductButtonListener(ActionListener listener) {
         btnDeleteProduct.addActionListener(listener);
     }
     
-    public void addShowCartButtonListener(ActionListener listener) {
+    public void addCreateProductButtonListener(ActionListener listener) {
         btnCreateProduct.addActionListener(listener);
     }
     
-   // public JComboBox<String> getComboBox() {
-        //return comboBox_1;
-    //}
+    public JComboBox<String> getComboBox() {
+        return comboBox_1;
+    }
     
-   // public void addExitButtonListener(ActionListener listener) {
-  //      comboBox_1.addActionListener(listener);
-   // }
+    public void addExitButtonListener(ActionListener listener) {
+        comboBox_1.addActionListener(listener);
+   }
     
     public void setCurrentBalance(double balance) {
     }

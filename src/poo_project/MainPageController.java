@@ -3,7 +3,9 @@ import gui.Login;
 import gui.MainPage;
 import gui.Products;
 import gui.RechargeAccount;
+import gui.Register;
 import gui.SendMoney;
+import model.User;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -25,7 +27,7 @@ public class MainPageController {
         @Override
         public void actionPerformed(ActionEvent e) {
         	Products products = new Products();
-        	ProductsController productsController = new ProductsController(products);
+        	ProductsController productsController = new ProductsController(products,false);
         	products.setVisible(true);
             view.dispose();
         }
@@ -57,11 +59,20 @@ public class MainPageController {
         public void actionPerformed(ActionEvent e) {
             JComboBox<String> comboBox = view.getComboBox(); 
             String selectedOption = (String) comboBox.getSelectedItem();
-            	UserSession.clearLoggedInUser();
-            	Login login = new Login();
-            	LoginController loginController = new LoginController(login);
-            	login.setVisible(true);
+            if ("Edit account".equals(selectedOption)) {
+            	User editUser = UserSession.getLoggedInUser();
+            	Register registerView = new Register();
+            	registerView.loadUserData(editUser);
+            	RegisterController registerController = new RegisterController(registerView, true);
+            	registerView.setVisible(true);
+            	view.dispose();
+            } else if ("Exit".equals(selectedOption)) {
+                UserSession.clearLoggedInUser();
+                Login login = new Login();
+                LoginController loginController = new LoginController(login);
+                login.setVisible(true);
                 view.dispose();
             }
         }
+    }
 }

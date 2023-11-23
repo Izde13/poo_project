@@ -18,11 +18,13 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.NumberFormatter;
 
+import model.Product;
+
 public class CreateProductView extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField idProduct;
+	private JFormattedTextField idProduct;
 	private JTextField name;
 	private JFormattedTextField  cost;
 	private JFormattedTextField  quantityAvailable;
@@ -65,6 +67,13 @@ public class CreateProductView extends JFrame {
 	        formatter.setMinimum(0);
 	        formatter.setMaximum(Integer.MAX_VALUE);
 	        formatter.setAllowsInvalid(false);
+	        
+			NumberFormat formatDouble = NumberFormat.getInstance();
+		    NumberFormatter doubleFormatter = new NumberFormatter(formatDouble);
+		    doubleFormatter.setValueClass(Double.class);
+		    doubleFormatter.setMinimum(0.0);
+		    doubleFormatter.setMaximum(Double.MAX_VALUE);
+		    doubleFormatter.setAllowsInvalid(false);
 
 			setContentPane(contentPane);
 			contentPane.setLayout(null);
@@ -81,12 +90,12 @@ public class CreateProductView extends JFrame {
 			lblNewLabel_1.setBounds(178, 56, 91, 23);
 			contentPane.add(lblNewLabel_1);
 			
-			idProduct = new JTextField();
+			idProduct = new JFormattedTextField(formatter);
 			idProduct.setBounds(178, 75, 325, 20);
 			contentPane.add(idProduct);
 			idProduct.setColumns(10);
 			
-			btnNewProduct = new JButton("Create");
+			btnNewProduct = new JButton("Save");
 			btnNewProduct.setForeground(new Color(0, 64, 128));
 			btnNewProduct.setBackground(new Color(0, 128, 255));
 			btnNewProduct.setBounds(178, 385, 128, 23);
@@ -115,7 +124,7 @@ public class CreateProductView extends JFrame {
 			lblNewLabel_1_3_1.setBounds(178, 159, 91, 23);
 			contentPane.add(lblNewLabel_1_3_1);
 			
-			cost = new JFormattedTextField(formatter);
+			cost = new JFormattedTextField(doubleFormatter);
 			cost.setColumns(10);
 			cost.setBounds(178, 181, 325, 23);
 			contentPane.add(cost);
@@ -146,42 +155,39 @@ public class CreateProductView extends JFrame {
 			contentPane.add(saltySnacksCategory);
 			
 			sweetSnacksCategory = new JRadioButton("Sweet snacks");
-			sweetSnacksCategory.setBounds(314, 343, 91, 23);
+			sweetSnacksCategory.setBounds(314, 343, 130, 23);
 			contentPane.add(sweetSnacksCategory);
 		}
 
-
-		public String getFirstName() {
-			return idProduct.getText();
+		public int getIdProduct() {
+			return (int) idProduct.getValue();
 		}
-
-
-		public String getLastName() {
+		
+		public String getName() {
 			return name.getText();
 		}
-
-
-		public int getId() {
-			return (int) cost.getValue();
+		
+		public double getCost() {
+			return (double) cost.getValue();
 		}
-
-
-		public int getMobile() {
+		
+		public int getQuantityAvailable() {
 			return (int) quantityAvailable.getValue();
 		}
-
-	    public boolean isAdminRoleSelected() {
+		
+	    public boolean isDrinkCategorySelected() {
 	        return drinkCategory.isSelected();
 	    }
 
-	    public boolean isEmployeeRoleSelected() {
+	    public boolean isSaltySnacksCategorySelected() {
 	        return saltySnacksCategory.isSelected();
 	    }
 
-	    public boolean isStudentRoleSelected() {
+	    public boolean isSweetSnacksCategorySelected() {
 	        return sweetSnacksCategory.isSelected();
-	    }	
-	    
+	    }
+		
+
 	    public void showMessage(String mensaje) {
 	        JOptionPane.showMessageDialog(this, mensaje);
 	    }
@@ -192,14 +198,28 @@ public class CreateProductView extends JFrame {
 	        quantityAvailable.setText("");
 	        cost.setText("");
 	        quantityAvailable.setText("");
+	        drinkCategory.setSelected(false);
+	        saltySnacksCategory.setSelected(false);
+	        sweetSnacksCategory.setSelected(false);
 	    }
 	    
-	    public void addRegisterListener(ActionListener listener) {
+	    public void addNewProductListener(ActionListener listener) {
 	        btnNewProduct.addActionListener(listener);
 	    }
 	    
-	    public void addCancelRegisterListener(ActionListener listener) {
+	    public void addCancelListener(ActionListener listener) {
 	    	btnCancelRegister.addActionListener(listener);
+	    }
+	    
+	    public void loadProductData(Product product) {
+	        idProduct.setValue(product.getIdProduct());
+	        name.setText(product.getName());
+	        cost.setValue(product.getCost());
+	        quantityAvailable.setValue(product.getQuantityAvailable());
+
+	        if(product.getCategory().equals("Drinks")) drinkCategory.setSelected(true);
+	        if(product.getCategory().equals("Salty snacks")) saltySnacksCategory.setSelected(true);
+	        if(product.getCategory().equals("Sweet snacks")) sweetSnacksCategory.setSelected(true);
 	    }
 
 }

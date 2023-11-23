@@ -22,16 +22,12 @@ public class RechargeAccountController {
         public void actionPerformed(ActionEvent e) {
         	 User loggedInUser = UserSession.getLoggedInUser();
              double rechargeAmount = view.getAmountRecharge();
-             boolean successfulRecharge = AccountManager.rechargeAccount(loggedInUser, rechargeAmount);
-             if (successfulRecharge) {
-                 view.showMessage("Account recharged successfully");
-                 MainPage mainPage = new MainPage();
-                 MainPageController MainPageController = new MainPageController(mainPage);
-                 mainPage.setVisible(true);
-       			 view.dispose();
-             } else {
-                 view.showMessage("Account recharge failed");
-             }        
+             AccountManager.rechargeAccount(loggedInUser, rechargeAmount);
+             view.showMessage("Account recharged successfully");
+             MainPage mainPage = new MainPage();
+             MainPageController MainPageController = new MainPageController(mainPage);
+             mainPage.setVisible(true);
+       		 view.dispose();             
         }
     }
     

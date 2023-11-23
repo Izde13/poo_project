@@ -74,13 +74,19 @@ public class PurchaseSummaryController {
         @Override
         public void actionPerformed(ActionEvent e) {
     		JComboBox comboBox = view.getComboBox();
-        	String selectedCategory = (String) comboBox.getSelectedItem();
-        	accountManager.createMovement(loggedInUser.getIdUser(), currentProduct.getIdProduct(), costUnitProduct, amount, selectedCategory);     
-        	view.showMessage("Thanks for your purchase!");
-        	MainPage mainPage = new MainPage();
-            MainPageController MainPageController = new MainPageController(mainPage);
-            mainPage.setVisible(true);
-       		view.dispose();    
+        	String selectedTypePayment = (String) comboBox.getSelectedItem();
+        	boolean isInSufficientBalance  = AccountManager.validateBalance(totalPurchase);
+           	if(selectedTypePayment.equals("Money in account") && isInSufficientBalance){
+        		view.showMessage("Insufficient balance");	
+        	} else {
+        		AccountManager.updateBalance(totalPurchase);
+        		accountManager.createMovement(loggedInUser.getIdUser(), currentProduct.getIdProduct(), costUnitProduct, amount, selectedTypePayment);     
+        		view.showMessage("Thanks for your purchase!");
+        		MainPage mainPage = new MainPage();
+        		MainPageController MainPageController = new MainPageController(mainPage);
+        		mainPage.setVisible(true);
+        		view.dispose();        		
+        	}
         }
     }
     

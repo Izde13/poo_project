@@ -10,7 +10,7 @@ public class AccountManager {
 	//private static ArrayList<User> listUsers = new ArrayList<User>();
 	private static List<User> listUsers = new ArrayList<User>();
 	private static List<Account> listAccounts = new ArrayList<Account>();
-	private static ArrayList<MoneyRaiser> listMoneyRaiser = new ArrayList<MoneyRaiser>();
+	private static List<MoneyRaiser> listMoneyRaiser = new ArrayList<MoneyRaiser>();
 
 	
 	public AccountManager(){
@@ -27,6 +27,22 @@ public class AccountManager {
 		JsonFileManager.writeAccountToFile(listAccounts);
 	}
 	
+	public void editUser(User newUser){
+		for (int i = 0; i < listUsers.size(); i++) {
+		      if(listUsers.get(i).getIdUser() == newUser.getIdUser()) {
+		    	  listUsers.set(i, newUser);
+		      } 
+		 }
+		JsonFileManager.writeUsersToFile(listUsers);
+		
+		for (int i = 0; i < listAccounts.size(); i++) {
+		      if(listAccounts.get(i).getOwner().getIdUser() == newUser.getIdUser()) {
+		    	  Account editAccount = new Account(newUser);
+		    	  listAccounts.set(i, editAccount);
+		      } 
+		 }
+		JsonFileManager.writeAccountToFile(listAccounts);
+	}
 	
 	public boolean findIdUser(int id) {
 		 boolean result = false;
@@ -83,31 +99,62 @@ public class AccountManager {
 		return 0;
     }
 	
-    public static boolean rechargeAccount(User user, double rechargeAmount) {
-        for (Account account : listAccounts) {
-            if (account.getOwner().equals(user)) {
-                double currentBalance = account.getAvailableMoney();
-                double newBalance = currentBalance + rechargeAmount;
-                System.out.println("newBalance "+newBalance);
-                account.setAvailableMoney(newBalance);
-                return true;
-            }
-        }
-        return false;
+    public static void rechargeAccount(User user, double rechargeAmount) { 
+        for (int i = 0; i < listAccounts.size(); i++) {
+		      if(listAccounts.get(i).getOwner().getIdUser() == user.getIdUser()) {
+		    	  Account account = new Account(user);
+		    	  double currentBalance = account.getAvailableMoney();
+	              double newBalance = currentBalance + rechargeAmount;
+                  account.setAvailableMoney(newBalance);
+		    	  listAccounts.set(i, account);
+		      } 
+		 }
+		JsonFileManager.writeAccountToFile(listAccounts);
     }
     
-    public static boolean transferMoney(int id, double rechargeAmount) {
-        for (Account account : listAccounts) {
-            if (account.getOwner().getIdUser() == id) {
-                double currentBalance = account.getAvailableMoney();
-                double newBalance = currentBalance + rechargeAmount;
-                account.setAvailableMoney(newBalance);
-                return true;
+    public static void transferMoney(int id, double rechargeAmount) {
+    	User loggedInUser = UserSession.getLoggedInUser();      
+        for (int i = 0; i < listAccounts.size(); i++) {
+		      if(listAccounts.get(i).getOwner().getIdUser() == loggedInUser.getIdUser()) {		    	  
+		    	  double currentBalanceSource = listAccounts.get(i).getAvailableMoney();
+		    	  double newBalanceSource = currentBalanceSource - rechargeAmount;
+		    	  listAccounts.get(i).setAvailableMoney(newBalanceSource);
+		    	  listAccounts.set(i, listAccounts.get(i));
+		      }
+		      if(listAccounts.get(i).getOwner().getIdUser() == id) {		    	  
+		    	  double currentBalance = listAccounts.get(i).getAvailableMoney();
+		    	  double newBalance = currentBalance + rechargeAmount;
+		    	  listAccounts.get(i).setAvailableMoney(newBalance);
+		    	  listAccounts.set(i, listAccounts.get(i));
+		      } 
+		 }
+		JsonFileManager.writeAccountToFile(listAccounts);
+    }
+    
+    public static boolean validateBalance(double balance) {
+    	User loggedInUser = UserSession.getLoggedInUser();
+    	boolean res = true;
+    	for (Account account : listAccounts) {
+            if (account.getOwner().getIdUser() == loggedInUser.getIdUser()) {
+                res = account.getAvailableMoney() < balance;           
             }
         }
-        return false;
+    	return res;
     }
 	
+    public static void updateBalance(double totaltotalPurchase) {
+    	User loggedInUser = UserSession.getLoggedInUser();      
+        for (int i = 0; i < listAccounts.size(); i++) {
+		      if(listAccounts.get(i).getOwner().getIdUser() == loggedInUser.getIdUser()) {		    	  
+		    	  double currentBalanceSource = listAccounts.get(i).getAvailableMoney();
+		    	  double newBalanceSource = currentBalanceSource - totaltotalPurchase;
+		    	  listAccounts.get(i).setAvailableMoney(newBalanceSource);
+		    	  listAccounts.set(i, listAccounts.get(i));
+		      }		     
+		 }
+		JsonFileManager.writeAccountToFile(listAccounts);
+    }
+    
 	public void createMovement(int idUser,int idProduct,double costProduct, int amount, String paymentType) {
 		User user = editUserById(idUser);
 		double discount = getDiscount(user.getRole(), costProduct, amount);	
@@ -116,6 +163,7 @@ public class AccountManager {
 		int idMovement = listMoneyRaiser.size()+1;
 		MoneyRaiser newMovement = new MoneyRaiser(idMovement,idUser,idProduct,costProduct,discount,valueIva,totalCost,amount,paymentType);
 		listMoneyRaiser.add(newMovement);		
+		JsonFileManager.writeMovementsToFile(listMoneyRaiser);
 		listMoneyRaiser.get(idMovement-1).generateBill();;
 	}
 	

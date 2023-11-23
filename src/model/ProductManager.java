@@ -1,17 +1,30 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ProductManager {
-	private static ArrayList<Product> listProducts = new ArrayList<Product>();
+	private static List<Product> listProducts = new ArrayList<Product>();
+
 	
 	public ProductManager() {
-		// TODO Auto-generated constructor stub
+		this.listProducts = JsonFileManager.readProductsFromFile("C:\\Documents\\Universidad\\POO\\1er_corte\\poo_project\\src\\model\\products.json");
 	}
 	
-	void createProduct(Product newProduct){
+	public void createProduct(Product newProduct){
 		listProducts.add(newProduct);
+		JsonFileManager.writeProductToFile(listProducts);
 	}
+	
+	public void editProduct(Product newProduct){
+		for (int i = 0; i < listProducts.size(); i++) {
+		      if(listProducts.get(i).getIdProduct() == newProduct.getIdProduct()) {
+		    	  listProducts.set(i, newProduct);
+		      } 
+		 }
+		JsonFileManager.writeProductToFile(listProducts);
+	}
+	
 	
 	public boolean findIdProduct(int id) {
 		 boolean result = false;
@@ -81,7 +94,7 @@ public class ProductManager {
     public ArrayList<Product> getSaltySnacksProducts() {
         ArrayList<Product> drinkProducts = new ArrayList<>();
         for (Product product : listProducts) {
-            if (product.getCategory().equals("SaltySnacks")) {
+            if (product.getCategory().equals("Salty snacks")) {
                 drinkProducts.add(product);
             }
         }
@@ -91,7 +104,7 @@ public class ProductManager {
     public ArrayList<Product> getSweetSnacksProducts() {
         ArrayList<Product> drinkProducts = new ArrayList<>();
         for (Product product : listProducts) {
-            if (product.getCategory().equals("SweetSnacks")) {
+            if (product.getCategory().equals("Sweet snacks")) {
                 drinkProducts.add(product);
             }
         }

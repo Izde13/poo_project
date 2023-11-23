@@ -122,7 +122,7 @@ public class Products extends JFrame {
         sweetSnacksComboBox.setBounds(10, 51, 661, 20);
         panel_2_1_1.add(sweetSnacksComboBox);
 
-        btnBuy = new JButton("Buy");
+        btnBuy = new JButton("Ok");
         btnBuy.setBounds(196, 386, 145, 23);
         panel_1.add(btnBuy);
 
