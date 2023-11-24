@@ -21,18 +21,22 @@ public class ProductsController {
     private PurchaseSummaryController purchaseSummaryController;
     private CreateProductView createProductView;
 	public boolean isEditProduct = false;
+	public boolean isDeleteProduct = false;
 	
-	public ProductsController(Products view, boolean isEditProduct) {
+	public ProductsController(Products view, boolean isEditProduct, boolean isDeleteProduct) {
 		this.view = view;
         this.view.addBuyListener(new BuyListener());	
         this.view.cancelBuyListener(new CancelBuyListener());
         this.isEditProduct = isEditProduct;
+        this.isDeleteProduct = isDeleteProduct;
 	}
 	
-	public ProductsController(CreateProductView createProductView, boolean isEditProduct) {
+	public ProductsController(CreateProductView createProductView, boolean isEditProduct, boolean isDeleteProduct) {
 		this.createProductView = createProductView;
 		this.createProductView.addNewProductListener(new CreateProductListener());
+        this.createProductView.addCancelListener(new CancelBuyListener());
 		this.isEditProduct = isEditProduct;
+		this.isDeleteProduct = isDeleteProduct;
 	}
 	
     class BuyListener implements ActionListener {
@@ -43,12 +47,20 @@ public class ProductsController {
             if (selectedComboBox != null && selectedItem != null && !selectedItem.isEmpty()) {
      			ProductManager productManager = new ProductManager();		   	
                 Product product = productManager.productByName(selectedItem);
-                if(UserSession.getLoggedInUser().getRole().equals("Admin") && isEditProduct) {
-                	CreateProductView createProductView = new CreateProductView();
-                	createProductView.loadProductData(product);
-                	ProductsController productsController = new ProductsController(createProductView, isEditProduct);
-                	createProductView.setVisible(true);
-                	view.dispose();
+                if(UserSession.getLoggedInUser().getRole().equals("Admin")) {
+                	if(isEditProduct) {
+                		CreateProductView createProductView = new CreateProductView();
+                		createProductView.loadProductData(product);
+                		ProductsController productsController = new ProductsController(createProductView, isEditProduct, isDeleteProduct);
+                		createProductView.setVisible(true);
+                		view.dispose();                		
+                	} else if(isDeleteProduct) {
+                		productManager.deleteProduct(product.getIdProduct());           	
+                		MainPageAdmin mainPageAdmin = new MainPageAdmin();
+                    	MainPageAdminController mainPageAdminController  = new MainPageAdminController(mainPageAdmin);
+                    	mainPageAdmin.setVisible(true);
+                		view.dispose();                		
+                	}
                 } else {
                     purchaseSummaryView = new PurchaseSummary();
                     purchaseSummaryController = new PurchaseSummaryController(purchaseSummaryView);
@@ -67,7 +79,7 @@ public class ProductsController {
     class CancelBuyListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-        	
+        	System.out.println("Rol" + UserSession.getLoggedInUser().getRole());
             if(UserSession.getLoggedInUser().getRole().equals("Admin")) {
             	MainPageAdmin mainPageAdmin = new MainPageAdmin();
             	MainPageAdminController mainPageAdminController  = new MainPageAdminController(mainPageAdmin);

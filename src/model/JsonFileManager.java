@@ -72,6 +72,17 @@ public class JsonFileManager {
 	     return productList;
 	 }	 
 	 
+	 public static List<MoneyRaiser> readMovementsFromFile(String pathFile) {
+		 List<MoneyRaiser> movementsList = new ArrayList<>();
+	     try (FileReader reader = new FileReader(pathFile)) {
+	    	 Gson gson = new Gson();
+	    	 movementsList = gson.fromJson(reader, new TypeToken<List<MoneyRaiser>>(){}.getType());
+	     } catch (IOException e) {
+	    	 e.printStackTrace();
+	     }
+	     return movementsList;
+	 }	
+	 
 	 public static void writeUsersToFile(List<User> userList) {
 	    JsonArray jsonArray = new JsonArray();
 	    String pathFile = "C:\\Documents\\Universidad\\POO\\1er_corte\\poo_project\\src\\model\\users.json";

@@ -12,7 +12,7 @@ public class MoneyRaiser {
 	int amount;
 	String paymentType;
 	
-	MoneyRaiser( int idMovement,int idUser,int idProduct,double costProduct,double discount,double valueIva,double totalCost,int amount,String paymentType) {
+	public MoneyRaiser( int idMovement,int idUser,int idProduct,double costProduct,double discount,double valueIva,double totalCost,int amount,String paymentType) {
 		this.idMovement = idMovement;
 		this.idUser = idUser ;
 		this.idProduct = idProduct;
@@ -24,7 +24,7 @@ public class MoneyRaiser {
 		this.paymentType = paymentType;
 	}
 	
-	void generateBill(){
+	public void generateBill(){
 		ProductManager productManager = new ProductManager();
 		AccountManager accountManager = new AccountManager();
 		String nameProduct = productManager.productNameById(idProduct);

@@ -1,20 +1,23 @@
 [
   {
-    "firstName": "Thatch",
-    "lastName": "Bucknill",
+    "firstName": "Jane",
+    "lastName": "Doe",
     "idUser": 1,
-    "mobile": 5926479845,
-    "role": "Student",
-    "email": "tbucknill0@flickr.com",
+    "mobile": 1234567890,
+    "role": "user",
+    "email": "john.doe@example.com",
     "password": [
-      "g",
-      "K",
-      "0",
-      "\u0027",
-      "+",
-      "Y",
-      "T",
-      "`"
+      "p",
+      "a",
+      "s",
+      "s",
+      "w",
+      "o",
+      "r",
+      "d",
+      "1",
+      "2",
+      "3"
     ]
   },
   {
@@ -455,44 +458,18 @@
     ]
   },
   {
-    "firstName": "Tomas",
-    "lastName": "Ricardo",
-    "idUser": 123,
-    "mobile": 123,
-    "role": "Student",
-    "email": "asd",
-    "password": [
-      "1",
-      "2",
-      "3"
-    ]
-  },
-  {
     "firstName": "SirAdmin",
     "lastName": "adminLast",
     "idUser": 789,
     "mobile": 3214,
     "role": "Admin",
-    "email": "admin",
+    "email": "admin@admin.com",
     "password": [
       "a",
       "d",
       "m",
       "i",
       "n"
-    ]
-  },
-  {
-    "firstName": "jjhg",
-    "lastName": "jghj",
-    "idUser": 78945,
-    "mobile": 828,
-    "role": "Student",
-    "email": "fgsd",
-    "password": [
-      "g",
-      "d",
-      "f"
     ]
   },
   {
@@ -509,6 +486,21 @@
       "r",
       "e",
       "s"
+    ]
+  },
+  {
+    "firstName": "Angel",
+    "lastName": "David",
+    "idUser": 9789,
+    "mobile": 789,
+    "role": "Admin",
+    "email": "angel@angel.com",
+    "password": [
+      "a",
+      "n",
+      "g",
+      "e",
+      "l"
     ]
   }
 ]

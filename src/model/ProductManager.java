@@ -25,6 +25,15 @@ public class ProductManager {
 		JsonFileManager.writeProductToFile(listProducts);
 	}
 	
+	public void updateStock(Product newProduct, int newValue){
+		for (int i = 0; i < listProducts.size(); i++) {
+		      if(listProducts.get(i).getIdProduct() == newProduct.getIdProduct()) {
+		    	  newProduct.setQuantityAvailable(newValue);
+		    	  listProducts.set(i, newProduct);
+		      } 
+		 }
+		JsonFileManager.writeProductToFile(listProducts);
+	}
 	
 	public boolean findIdProduct(int id) {
 		 boolean result = false;
@@ -51,7 +60,10 @@ public class ProductManager {
 		    	  listProducts.remove(i);
 		      } 
 		 }
+		System.out.println("Ok delete");
+		JsonFileManager.writeProductToFile(listProducts);
 	}
+	
 	
 	public void showAllProducts() {
 		for (int i = 0; i < listProducts.size(); i++) {

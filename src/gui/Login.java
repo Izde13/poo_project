@@ -19,10 +19,10 @@ public class Login extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JPasswordField pass;
-	private JTextField email;
-    private JButton btnSignIn;
-    JButton btnRegister;
+	public JPasswordField pass;
+	public JTextField email;
+    public JButton btnSignIn;
+    public JButton btnRegister;
 
 
 	/**

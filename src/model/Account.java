@@ -5,7 +5,7 @@ public class Account {
 	private User owner;
 	
 	
-	Account(User owner) {
+	public Account(User owner) {
 	    this.availableMoney = 0;
 	    this.owner = owner;
 	}

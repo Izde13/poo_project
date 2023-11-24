@@ -11,6 +11,7 @@ import gui.MainPage;
 import gui.PurchaseSummary;
 import model.AccountManager;
 import model.Product;
+import model.ProductManager;
 import model.User;
 
 public class PurchaseSummaryController {
@@ -18,6 +19,7 @@ public class PurchaseSummaryController {
     private PurchaseSummary view;
     private Product currentProduct;
     private AccountManager accountManager;
+    private ProductManager productManager;
     private double costUnitProduct;
     private double costTotalProducts;
     private double discount;
@@ -29,6 +31,7 @@ public class PurchaseSummaryController {
     public PurchaseSummaryController(PurchaseSummary view) {
         this.view = view;
         this.accountManager = new AccountManager();
+        this.productManager = new ProductManager();
         this.view.addAmountChangeListener(new AmountChangeListener());
         this.view.addBuyOkListener(new BuyListener());
         this.view.addBuyCancelListener(new CancelBuyListener());     
@@ -78,8 +81,13 @@ public class PurchaseSummaryController {
         	boolean isInSufficientBalance  = AccountManager.validateBalance(totalPurchase);
            	if(selectedTypePayment.equals("Money in account") && isInSufficientBalance){
         		view.showMessage("Insufficient balance");	
+        	} else if(currentProduct.getQuantityAvailable() < amount ) {
+        		view.showMessage("Insufficient amount of products");
         	} else {
-        		AccountManager.updateBalance(totalPurchase);
+        		if(selectedTypePayment.equals("Money in account")) {
+        			AccountManager.updateBalance(totalPurchase);
+        		}
+        		productManager.updateStock(currentProduct, currentProduct.getQuantityAvailable() - amount);
         		accountManager.createMovement(loggedInUser.getIdUser(), currentProduct.getIdProduct(), costUnitProduct, amount, selectedTypePayment);     
         		view.showMessage("Thanks for your purchase!");
         		MainPage mainPage = new MainPage();

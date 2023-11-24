@@ -1,10 +1,10 @@
 [
   {
     "idProduct": 1,
-    "name": "Potato chips",
-    "cost": 295.29,
-    "category": "Salty snacks",
-    "quantityAvailable": 3
+    "name": "Original Product",
+    "cost": 25.0,
+    "category": "Category",
+    "quantityAvailable": 75
   },
   {
     "idProduct": 2,
@@ -53,7 +53,7 @@
     "name": "Mountain Dew",
     "cost": 717.83,
     "category": "Drinks",
-    "quantityAvailable": 10
+    "quantityAvailable": 7
   },
   {
     "idProduct": 9,
@@ -102,7 +102,7 @@
     "name": "Almonds",
     "cost": 646.67,
     "category": "Salty snacks",
-    "quantityAvailable": 9
+    "quantityAvailable": 8
   },
   {
     "idProduct": 16,
@@ -140,13 +140,6 @@
     "quantityAvailable": 11
   },
   {
-    "idProduct": 99,
-    "name": "Arroz",
-    "cost": 256.0,
-    "category": "Drinks",
-    "quantityAvailable": 4
-  },
-  {
     "idProduct": 98,
     "name": "pasta",
     "cost": 25894.0,
@@ -161,10 +154,10 @@
     "quantityAvailable": 8
   },
   {
-    "idProduct": 96,
-    "name": "Mani",
-    "cost": 2560.0,
-    "category": "Salty snacks",
-    "quantityAvailable": 2
+    "idProduct": 1495,
+    "name": "Melao",
+    "cost": 4800.0,
+    "category": "Sweet snacks",
+    "quantityAvailable": 1
   }
 ]

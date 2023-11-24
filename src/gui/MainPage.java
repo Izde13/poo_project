@@ -99,6 +99,7 @@ public class MainPage extends JFrame {
 		panel.add(comboBox_1);
 		comboBox_1.addItem("");
 		comboBox_1.addItem("Edit account");
+		comboBox_1.addItem("Delete account");
 		comboBox_1.addItem("Exit");
 		
 		btnProducts = new JButton("Products");

@@ -7,7 +7,6 @@ import poo_project.UserSession;
 
 public class AccountManager {
 
-	//private static ArrayList<User> listUsers = new ArrayList<User>();
 	private static List<User> listUsers = new ArrayList<User>();
 	private static List<Account> listAccounts = new ArrayList<Account>();
 	private static List<MoneyRaiser> listMoneyRaiser = new ArrayList<MoneyRaiser>();
@@ -16,6 +15,7 @@ public class AccountManager {
 	public AccountManager(){
         this.listUsers = JsonFileManager.readUsersFromFile("C:\\Documents\\Universidad\\POO\\1er_corte\\poo_project\\src\\model\\users.json");
         this.listAccounts = JsonFileManager.readAccountFromFile("C:\\Documents\\Universidad\\POO\\1er_corte\\poo_project\\src\\model\\account.json");
+        this.listMoneyRaiser = JsonFileManager.readMovementsFromFile("C:\\Documents\\Universidad\\POO\\1er_corte\\poo_project\\src\\model\\MoneyRaiser.json");
     }
 
 	
@@ -38,6 +38,7 @@ public class AccountManager {
 		for (int i = 0; i < listAccounts.size(); i++) {
 		      if(listAccounts.get(i).getOwner().getIdUser() == newUser.getIdUser()) {
 		    	  Account editAccount = new Account(newUser);
+		    	  editAccount.setAvailableMoney(listAccounts.get(i).getAvailableMoney());
 		    	  listAccounts.set(i, editAccount);
 		      } 
 		 }
@@ -54,7 +55,7 @@ public class AccountManager {
 		return result;
 	}
 	
-	boolean isAdmin(int id) {
+	public boolean isAdmin(int id) {
 		 boolean result = false;
 		 for (int i = 0; i < listUsers.size(); i++) {
 			 int idUser = listUsers.get(i).getIdUser();
@@ -66,8 +67,7 @@ public class AccountManager {
 		return result;
 	}
 	
-	User editUserById(int id) {
-		//Validar si tambien debo editar la cuenta
+	public User editUserById(int id) {
 		for (int i = 0; i < listUsers.size(); i++) {
 		      if(listUsers.get(i).getIdUser() == id ) {
 		    	  return listUsers.get(i);
@@ -76,17 +76,20 @@ public class AccountManager {
 		return null;
 	}
 	
-	void deleteUser(int id){
+	public void deleteUser(int id){
 		for (int i = 0; i < listUsers.size(); i++) {
 		      if(listUsers.get(i).getIdUser() == id ) {
 		    	  listUsers.remove(i);
 		      } 
 		 }
+		JsonFileManager.writeUsersToFile(listUsers);
 		for (int i = 0; i < listAccounts.size(); i++) {
 			if(listAccounts.get(i).getOwner().getIdUser() == id ) {
 				listAccounts.remove(i);
 		    } 
 		 }
+		JsonFileManager.writeAccountToFile(listAccounts);
+		System.out.println("Delete user ok");
 	}
 	
     public double getCurrentBalance() {
@@ -190,7 +193,7 @@ public class AccountManager {
 		return totalCost - discount + iva;
 	}
 	
-	String nameUserById(int id) {
+	public String nameUserById(int id) {
 		for (int i = 0; i < listUsers.size(); i++) {
 		      if(listUsers.get(i).getIdUser() == id ) {
 		    	  return listUsers.get(i).getFirstName() + " " + listUsers.get(i).getLastName();
@@ -199,7 +202,7 @@ public class AccountManager {
 		return null;
 	}
 	
-	String roleUserById(int id) {
+	public String roleUserById(int id) {
 		for (int i = 0; i < listUsers.size(); i++) {
 		      if(listUsers.get(i).getIdUser() == id ) {
 		    	  return listUsers.get(i).getRole();

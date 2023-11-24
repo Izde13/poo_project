@@ -27,15 +27,15 @@ public class Register extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField firstName;
-	private JPasswordField pass;
-	private JTextField email;
-	private JTextField lastName;
-	private JFormattedTextField  id;
-	private JFormattedTextField  mobile;
-	private JRadioButton studentRole;
-	private JRadioButton employeeRole;
-	private JRadioButton adminRole;
+	public JTextField firstName;
+	public JPasswordField pass;
+	public JTextField email;
+	public JTextField lastName;
+	public JFormattedTextField  id;
+	public JFormattedTextField  mobile;
+	public JRadioButton studentRole;
+	public JRadioButton employeeRole;
+	public JRadioButton adminRole;
 	private JButton togglePasswordButton;
 
 	JButton btnNewRegister;	

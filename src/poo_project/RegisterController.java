@@ -7,6 +7,7 @@ import java.util.regex.Pattern;
 
 import gui.Login;
 import gui.MainPage;
+import gui.MainPageAdmin;
 import gui.Register;
 import model.AccountManager;
 import model.User;
@@ -80,9 +81,16 @@ public class RegisterController {
         public void actionPerformed(ActionEvent e) {
         	registerView.clearForm();
         	if(isEditUser) {
-        		MainPage mainPage = new MainPage();
-        		MainPageController mainPageController = new MainPageController(mainPage);
-        		mainPage.setVisible(true);
+        		User user = UserSession.getLoggedInUser();
+        		if(user.getRole().equals("Admin")) {
+        			MainPageAdmin mainPageAdminView = new MainPageAdmin();
+        			MainPageAdminController mainPageAdminController = new MainPageAdminController(mainPageAdminView);
+        			mainPageAdminView.setVisible(true);		
+        		} else {
+        			MainPage mainPage = new MainPage();
+        			MainPageController mainPageController = new MainPageController(mainPage);
+        			mainPage.setVisible(true);        			
+        		}
         	} else {
         		Login loginView = new Login();
         		LoginController loginController = new LoginController(loginView);
@@ -104,11 +112,21 @@ public class RegisterController {
     
     public void editUser(User user, AccountManager accountManager) {
     	accountManager.editUser(user);
+    	UserSession.setLoggedInUser(user);
 		registerView.showMessage("Register succesful");
 		registerView.clearForm();
-		MainPage mainPageView = new MainPage();
-		MainPageController mainPageController = new MainPageController(mainPageView);
-		mainPageView.setVisible(true);
+		
+		if(user.getRole().equals("Admin")) {
+			MainPageAdmin mainPageAdminView = new MainPageAdmin();
+			MainPageAdminController mainPageAdminController = new MainPageAdminController(mainPageAdminView);
+			mainPageAdminView.setVisible(true);
+			
+		} else {
+			MainPage mainPageView = new MainPage();
+			MainPageController mainPageController = new MainPageController(mainPageView);
+			mainPageView.setVisible(true);
+		}
+
 		registerView.dispose();
     }
     

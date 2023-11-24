@@ -2,12 +2,45 @@
   {
     "idMovement": 1,
     "idUser": 123789,
-    "idProduct": 2,
-    "costProduct": 423.36,
+    "idProduct": 8,
+    "costProduct": 717.83,
     "discount": 0.0,
-    "valueIva": 80.4384,
-    "totalCost": 503.7984,
+    "valueIva": 136.3877,
+    "totalCost": 854.2177,
     "amount": 1,
     "paymentType": "Money in account"
+  },
+  {
+    "idMovement": 2,
+    "idUser": 123789,
+    "idProduct": 8,
+    "costProduct": 717.83,
+    "discount": 0.0,
+    "valueIva": 136.3877,
+    "totalCost": 854.2177,
+    "amount": 1,
+    "paymentType": "Card"
+  },
+  {
+    "idMovement": 3,
+    "idUser": 123789,
+    "idProduct": 15,
+    "costProduct": 646.67,
+    "discount": 0.0,
+    "valueIva": 122.8673,
+    "totalCost": 769.5373,
+    "amount": 1,
+    "paymentType": "Coins"
+  },
+  {
+    "idMovement": 4,
+    "idUser": 123789,
+    "idProduct": 8,
+    "costProduct": 717.83,
+    "discount": 0.0,
+    "valueIva": 136.3877,
+    "totalCost": 854.2177,
+    "amount": 1,
+    "paymentType": "Card"
   }
 ]
